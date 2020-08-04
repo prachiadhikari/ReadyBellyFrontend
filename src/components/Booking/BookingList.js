@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Table } from "react-bootstrap";
@@ -8,6 +7,7 @@ import {
   MDBCol,
   MDBContainer,
   Link,
+  MDBNavbarToggler,MDBModal,
   MDBCard,
   MDBCardBody,
   MDBTooltip,
@@ -21,9 +21,40 @@ import Navigation from "../NavbarM";
 import Footer from "../Footer";
 import Axios from "axios";
 import CollectionEmpty from "../CollectionEmpty";
+import Feedback from "../FeedbackPage";
 
 
 class BookingList extends Component {
+
+  state = {
+    isOpen: false,
+  };
+
+  toggleCollapse = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
+
+  state = {
+    modal2: false,
+    modal3: false,
+  };
+
+  toggle = (nr) => () => {
+    let modalNumber = "modal" + nr;
+    this.setState({
+      [modalNumber]: !this.state[modalNumber],
+    });
+  };
+  toggleFeedbackModal = (purchaseId) => () => {
+    if (purchaseId !== null && purchaseId !== undefined) {
+      this.setState({selectedPurchaseId: purchaseId,
+        feedbackModal: !this.state.feedbackModal})
+    } else {
+      this.setState({feedbackModal: !this.state.feedbackModal})
+    }
+    // this.setState({feedbackModal: !this.state.feedbackModal});
+
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -34,33 +65,6 @@ class BookingList extends Component {
     this.getAllBookings();
   }
 
-  // updateBookingStatus = function(booking, status){
-  //   console.log(booking);
-  //   const axios = require('axios');
-  //   const { version } = require('axios/package');
-  //   axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('userToken');
-  //   axios.defaults.headers.common['Content-Type'] = 'application/json';
-  //   var data ={id :'', status:''};
-  //   if(status === 'delivered'){
-  //       data.id= booking.id;
-  //       data.status= 'DELIVERED';
-  //   }else if(status === 'processing') {
-  //       data.id= booking.id;
-  //       data.status= 'PROCESSING';
-  //   } 
-  //   else  {
-  //       data.id= booking.id;
-  //       data.status= 'CANCELED';
-  //   } 
-
-  //   console.log(data);
-  //   axios.post("http://localhost:3023/api/purchase/booking/update",data)
-  //   .then(function(response) {
-  //     toast("Booking status updated successfully.",{autoClose: 1000});
-  //     location.reload();
-  //   });
-  
-  // }
 
   deletePurchase = (purchaseId) => {
     var x = confirm("You want to delete ?");
@@ -85,6 +89,22 @@ class BookingList extends Component {
       return false;
     }
   };
+  cancelBooking = function(purchaseId, feedback){
+    var headers = {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      };
+    var data ={status: 'CANCELED', feedback: feedback};
+     Axios.post("http://localhost:3023/api/purchase/"+ purchaseId + "/status-update" , data, {
+          headers: headers,
+        })
+        .then((response) => {
+          toast.success("Booking Status Updated Sucessfully");
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message);
+        });
+  }
    updateBookingStatus = function(booking, status, purchaseId){
     console.log(booking);
     const axios = require('axios');
@@ -171,6 +191,7 @@ class BookingList extends Component {
                         <th>Quantity</th>
                         
                         <th>Status</th>
+                        <th>User Remarks</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -190,13 +211,17 @@ class BookingList extends Component {
                           <td>{purchase.quantity}</td>
                          
                           <td> {purchase.status}</td>
+                          <td>{purchase.userRemarks}</td>
+                          
                           <td>
                             <MDBBtn color="primary" style={{paddingRight:'15px',display : (purchase.status ==='CANCELED'  || purchase.status ==='DELIVERED' || purchase.status ==='PROCESSING')? 'none' :'block'}}
                     onClick = {() => this.updateBookingStatus(purchase,'delivered')}>Deliver</MDBBtn> 
                     <MDBBtn color="warning" style={{paddingRight:'15px', display : ( purchase.status ==='DELIVERED' || purchase.status ==='PROCESSING' || purchase.status ==='CANCELED' )? 'none' :'block'}} 
                     onClick = {() => this.updateBookingStatus(purchase,'processing')}> PROCESSING </MDBBtn> 
                             <MDBBtn color="danger" style={{paddingRight:'15px', display : (purchase.status ==='CANCELED' || purchase.status ==='DELIVERED' || purchase.status ==='PROCESSING')? 'none' :'block'}} 
-                    onClick = {() => this.updateBookingStatus(purchase,'canceled')}> Cancel </MDBBtn>
+                    onClick = {this.toggleFeedbackModal(purchase.id)}>  &nbsp;&nbsp;
+                    Cancel &nbsp;&nbsp; </MDBBtn>
+                          
                      <a onClick={() => this.deletePurchase(purchase.id)}>
                                           <img
                                             style={{
@@ -219,6 +244,10 @@ class BookingList extends Component {
             </MDBCard>
           </MDBRow>
         </MDBContainer>
+        <MDBNavbarToggler onClick={this.toggleCollapse} />
+        <MDBModal isOpen={this.state.feedbackModal} toggle={this.toggleFeedbackModal}>
+          <Feedback onFeedbackSubmit={this.cancelBooking} selectedPurchaseId={this.state.selectedPurchaseId} toggleMethod={this.toggleFeedbackModal}/>
+        </MDBModal>
         <Footer />
       </div>
     );

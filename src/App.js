@@ -26,6 +26,8 @@ import ViewCart from "./components/product/ViewCart";
 import Pay from "./components/Booking/Pay";
 import BookingList from "./components/Booking/BookingList";
 import Profile from "./components/Profile/Profile";
+import Profilepage from "./components/Profile/Profilepage";
+
 
 import UserBookingList from "./components/Booking/UserBookingList";
 import UserList from "./components/Admin/UserList";
@@ -76,6 +78,12 @@ class App extends React.Component {
           </Route>
            <Route exact path="/userbooking">
             <UserBookingList />
+          </Route>
+          <Route exact path="/profilepage">
+            <Profilepage />
+          </Route>
+          <Route exact path="/profile">
+            <Profile />
           </Route>
 	 <Route exact path="/userlist">
             <UserList />
