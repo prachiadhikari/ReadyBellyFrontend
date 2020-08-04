@@ -7,7 +7,7 @@ import Footer from '../Footer'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
-export default class UserProfile extends Component {
+export default class ProfilePage extends Component {
 
     constructor(props) {
         super(props)
@@ -157,100 +157,74 @@ export default class UserProfile extends Component {
             <Container>
              <Navigation />
                   
- <MDBContainer style={{
-  paddingLeft:"200px", marginTop:"20px"}}>
-      <MDBRow>
-        <MDBCol md="8">
-          <MDBCard>
-          <MDBCardHeader className="form-header warm-flame-gradient rounded white-text">
+             <MDBCard className="my-5 px-5 pb-5">
+     
+          <MDBCardHeader className="form-header orange accent-2 rounded white-text">
            <h3 className="my-3" >
-            <MDBIcon icon="user-edit"/> Update Profile
+            <MDBIcon icon="user"/> Your Profile
              </h3>
                                 
            </MDBCardHeader>
             <MDBCardBody>
-                        <Form>
-                            <FormGroup>
-                                <Label for='fullname'>Fullname</Label>
-                                <Input type='text'
-                                    id="fullname"
-                                    name='fullname'
-                                    value={this.state.user.fullname}
-                                    onChange={(e) => this.handleChange(e)}
-                                />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for='address1'>Address</Label>
-                                <Input type='text' id='address1'
-                                    name='address1'
-                                    value={this.state.user.address1}
-                                    onChange={(e) => this.handleChange(e)} />
-                            </FormGroup>
-                             <FormGroup>
-                                <Label for='phone'>Phone Number</Label>
-                                <Input type='text' id='phone'
-                                    name='phone'
-                                    value={this.state.user.phone}
-                                    onChange={(e) => this.handleChange(e)} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for='mobile'>Mobile Number</Label>
-                                <Input type='text' id='mobile'
-                                    name='mobile'
-                                    value={this.state.user.mobile}
-                                    onChange={(e) => this.handleChange(e)} />
-                            </FormGroup>
-                             <FormGroup>
-                                <Label for='email'>Email</Label>
-                                <Input type='text' id='email'
-                                    name='email'
-                                    value={this.state.user.email}
-
-                                    />
-
-                                    <h6 style={{color:"red"}}>
-                                     The address used to identify your ReadyBelly Account to you and others. You can't change this email address.
-                                     </h6>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for='user_type'>UserType</Label>
-                                <Input type='text' id='user_type'
-                                    name='user_type'
-                                    value={this.state.user.user_type}
-                                    onChange={(e) => this.handleChange(e)} />
-                            </FormGroup>
-                             <FormGroup>
-                                             <div>
-                                             <img className='img-thumbnail'
-                                    width='400' src={`http://localhost:3023/${this.state.user.image_path}`}
+              <MDBRow>
+                <MDBCol sm="4">
+                <MDBCard style={{width:250,height:250}}>
+                <img className='img-thumbnail'
+                                    width='250' height='250' src={`http://localhost:3023/${this.state.user.image_path}`}
                                     alt="profile" />
-                                               <input
-                                                 type="file"
-                                                 inputprops={{
-                                                   accept: "image/*",
-                                                 }}
-                                                 id="previewImage"
-                                                 name="avatar"
-                                                 onChange={
-                                                   this.handleFileSelect
-                                                 }
-                                                 ref={(fileInput) =>
-                                                   (this.fileInput = fileInput)
-                                                 }
-                                               />{" "}
-                                             </div>
-                                           </FormGroup>
-                            <Button color='danger' onClick={this.uploadImageAndUpdate} block>Update User</Button>
-
-
-                            </Form>
-                     </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-
-        
-      </MDBRow>
-    </MDBContainer>
+                </MDBCard>
+                </MDBCol>
+                <MDBCol sm="8">
+                  <MDBCard>
+                    <MDBRow>
+                      <MDBCol>
+                        <MDBCard style={{height:100}}>
+                        <h4>FullName: {this.state.user.fullname}</h4>
+                        </MDBCard>
+                      </MDBCol>
+                      <MDBCol>
+                        <MDBCard style={{height:100}}>
+                        <h4>Address: {this.state.user.address}</h4>
+                        </MDBCard>
+                      </MDBCol>
+                    </MDBRow>
+                    <MDBRow>
+                      <MDBCol>
+                        <MDBCard style={{height:100}}>
+                        <h4>Phone number: {this.state.user.phone}</h4>
+                        </MDBCard>
+                      </MDBCol>
+                      <MDBCol>
+                        <MDBCard style={{height:100}}>
+                        <h4>Mobile Number: {this.state.user.mobile}</h4>
+                        </MDBCard>
+                      </MDBCol>
+                    </MDBRow>
+                    <MDBRow>
+                    <MDBCol>
+                        <MDBCard style={{height:100}}>
+                        <h4>Email: {this.state.user.email}</h4>
+                        </MDBCard>
+                      </MDBCol>
+                    </MDBRow>
+                    <MDBRow>
+                    <MDBCol>
+                        <MDBCard style={{height:100}}>
+                        <h4>UserType: {this.state.user.user_type}</h4>
+                        </MDBCard>
+                      </MDBCol>
+                    </MDBRow>
+                   
+                    Email:
+                    <hr/>
+                    UserType:
+                    <hr/>
+                  </MDBCard>
+                </MDBCol>
+              </MDBRow>
+                       
+            </MDBCardBody>
+    </MDBCard>
 
     
       

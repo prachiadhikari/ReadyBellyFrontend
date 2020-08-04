@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import StripeCheckout from 'react-stripe-checkout'
@@ -9,7 +8,8 @@ import {
   MDBRow,
   MDBCol,
   MDBContainer,
-  Link,
+  Link,MDBModal,
+  MDBNavbarToggler,
   MDBCard,
   MDBCardBody,
   MDBTooltip,
@@ -21,11 +21,44 @@ import {
 } from "mdbreact";
 import Navigation from "../NavbarM";
 import Footer from "../Footer";
+import Feedback from "../FeedbackPage";
 import CollectionEmpty from "../CollectionEmpty";
+
 
 import Axios from "axios";
 
 class UserBookingList extends Component {
+  state = {
+    isOpen: false,
+  };
+
+  toggleCollapse = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
+
+  state = {
+    modal2: false,
+    modal3: false,
+  };
+
+  toggle = (nr) => () => {
+    let modalNumber = "modal" + nr;
+    this.setState({
+      [modalNumber]: !this.state[modalNumber],
+    });
+  };
+
+  toggleFeedbackModal = (purchaseId) => () => {
+    if (purchaseId !== null && purchaseId !== undefined) {
+      this.setState({selectedPurchaseId: purchaseId,
+        feedbackModal: !this.state.feedbackModal})
+    } else {
+      this.setState({feedbackModal: !this.state.feedbackModal})
+    }
+    // this.setState({feedbackModal: !this.state.feedbackModal});
+
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -38,35 +71,17 @@ class UserBookingList extends Component {
   }
 
 
-cancelBooking = function(booking, status){
-    console.log(booking);
-    const axios = require('axios');
+cancelBooking = function(purchaseId, feedback){
     var headers = {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
       };
-
-    const { version } = require('axios/package');
-    axios.defaults.headers.common['Content-Type'] = 'application/json';
-    var data ={id :'', status:''};
-    if(status === 'pending'){
-        data.id= booking.id;
-        data.status= 'CANCELED';
-      }else  {
-        // data.id= booking.id;
-        // data.status= 'CANCELED';
-    } 
-
-    console.log(data);
-
-     axios
-        .post("http://localhost:3023/api/purchase/"+booking.id + "/status-update" , data, {
+    var data ={status: 'CANCELED', feedback: feedback};
+     Axios.post("http://localhost:3023/api/purchase/"+ purchaseId + "/status-update" , data, {
           headers: headers,
         })
         .then((response) => {
-          location.reload();
-          toast.response("Booking Status Updated Sucessfully");
-
+          toast.success("Booking Status Updated Sucessfully");
         })
         .catch((err) => {
           toast.error(err.response.data.message);
@@ -74,41 +89,45 @@ cancelBooking = function(booking, status){
   }
 
   
-  getAllBookings = () => {
-    var headers = {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + localStorage.getItem("token"),
-    };
+getAllBookings = () => {
+  var headers = {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + localStorage.getItem("token"),
+  };
 
-    Axios.get("http://localhost:3023/api/purchase/by/user/all", {headers: headers})
-        .then((res) => {
-          console.log(res.data);
-          this.setState({
-            purchases: res.data.products,
-          });
-        })
-        .catch((err) => {
-          toast.error(err.response.data.message);
+  Axios.get("http://localhost:3023/api/purchase/by/user/all", {headers: headers})
+      .then((res) => {
+        console.log(res.data);
+        this.setState({
+          purchases: res.data.products,
         });
-  }
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+}
 
   render() {
     if (!this.state.purchases || this.state.purchases.length < 1) {
       return (
-        <CollectionEmpty/>
+       <CollectionEmpty/>
       );
     }
     return (
       <div>
         <MDBContainer fluid>
           <Navigation />
-          <h2 className="font-weight-bold green-text" style={{ marginTop: "40px" }}>Your Booked Products</h2>
+          <h2 style={{ marginTop: "40px" }}>Your Booked Products</h2>
 
           <MDBRow>
             <MDBCard style={{ width: "100%" }}>
               <MDBCardBody>
                 <MDBCol sm="12">
-               
+                  <MDBBtn color="success">Cash on Delivery</MDBBtn>
+
+                  {
+                    <StripeCheckout stripeKey="pk_test_mOUfpxsf7uHArKmrOzVHLXu700t9B02FOq" />
+                  }
                   <Table striped bordered hover>
                     <thead>
                       <tr>
@@ -117,8 +136,8 @@ cancelBooking = function(booking, status){
                         <th>Product Name</th>
                         <th>Price</th>
                         <th>Quantity</th>
-                        
                         <th>Status</th>
+                        <th>Vendor Remarks</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -137,9 +156,25 @@ cancelBooking = function(booking, status){
                           <td>{purchase.price} /-</td>
                           <td>{purchase.quantity}</td>
                           <td> {purchase.status}</td>
+                          <td> {purchase.vendorRemarks}</td>
+
                           <td>
-                            <MDBBtn color="danger" style={{paddingRight:'15px', display : (purchase.status ==='CANCELED' || purchase.status ==='DELIVERED' || purchase.status ==='PROCESSING')? 'none' :'block'}} 
-                               onClick = {() => this.cancelBooking(purchase,'pending')}> Cancel </MDBBtn>
+                            <MDBBtn
+                              color="danger"
+                              style={{
+                                paddingRight: "15px",
+                                display:(
+                                  purchase.status === "CANCELED" ||
+                                  purchase.status === "DELIVERED" ||
+                                  purchase.status === "PROCESSING")
+                                    ? "none"
+                                    : "block",
+                              }}
+                              onClick={this.toggleFeedbackModal(purchase.id)}
+                            >
+                              &nbsp;&nbsp;
+                            Cancel &nbsp;&nbsp;
+                            </MDBBtn>
                           </td>
                         </tr>
                       ))}
@@ -149,8 +184,11 @@ cancelBooking = function(booking, status){
               </MDBCardBody>
             </MDBCard>
           </MDBRow>
-          
         </MDBContainer>
+        <MDBNavbarToggler onClick={this.toggleCollapse} />
+        <MDBModal isOpen={this.state.feedbackModal} toggle={this.toggleFeedbackModal}>
+          <Feedback onFeedbackSubmit={this.cancelBooking} selectedPurchaseId={this.state.selectedPurchaseId} toggleMethod={this.toggleFeedbackModal}/>
+        </MDBModal>
         <Footer />
       </div>
     );

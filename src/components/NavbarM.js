@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { Component } from "react";
 import {
   MDBNavbar,
@@ -112,11 +111,6 @@ class NavbarM extends Component {
                 </MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink as={Link} to="/contact">
-                  Top seller
-                </MDBNavLink>
-              </MDBNavItem>
-              <MDBNavItem>
                 <MDBNavLink as={Link} to="/products">
                   Products
                 </MDBNavLink>
@@ -134,7 +128,7 @@ class NavbarM extends Component {
             />
           </div>
         </MDBCol>)}
-          <MDBCol sm="2">
+        <MDBCol sm="2">
             <MDBNavbarNav>
               {!this.state.isLoggedIn ? (
                 <MDBNavItem>
@@ -150,30 +144,53 @@ class NavbarM extends Component {
                       <MDBIcon icon="user" />
                     </MDBDropdownToggle>
                     <MDBDropdownMenu className="dropdown-default">
-                      <MDBDropdownItem href="#">
-                        <MDBIcon icon="sign-in-alt" />
-                        <a onClick={this.handleLogout}>Logout</a>
-                      </MDBDropdownItem>
-                      {this.state.isLoggedInUserVendor ? (  
+
+                     {this.state.isLoggedInUserVendor ? (  
                       <MDBNavLink as={Link} to="/purchaselist"> 
                       <MDBDropdownItem> 
+                       <MDBIcon icon="clipboard-list"> {"  "} 
                           Purchases
+                           </MDBIcon>
                       </MDBDropdownItem>
                       </MDBNavLink>
                       ):(
+
+
                       <MDBNavLink as={Link} to="/userbooking"> 
+
                       <MDBDropdownItem> 
+                        <MDBIcon icon="clipboard-list"> {"  "}   
                           Your Booked Products
+                        </MDBIcon>
+                      </MDBDropdownItem>
+
+                      </MDBNavLink>
+                       
+                      )}
+
+                        <MDBNavLink as={Link} to="/profile"> 
+                      <MDBDropdownItem> 
+                      <MDBIcon icon="user-circle"> {"  "}   
+                         My Profile
+                           </MDBIcon>
                       </MDBDropdownItem>
                       </MDBNavLink>
-                      )}
-                      {this.state.isAdmin ? (  
+
                       
-			<MDBNavLink as={Link} to="/userlist"> 
+                       <MDBNavLink as={Link} to="/userlist"> 
                       <MDBDropdownItem> 
+                      <MDBIcon icon="users"> {"  "}   
                           Registered Users
+                           </MDBIcon>
                       </MDBDropdownItem>
-                      </MDBNavLink>):(<MDBCol></MDBCol>)}
+                      </MDBNavLink>
+
+                      <MDBDropdownItem href="#">
+                        <MDBIcon icon="sign-in-alt">
+                        <a onClick={this.handleLogout}>Logout</a>
+                        </MDBIcon>
+                      </MDBDropdownItem>
+                     
                     </MDBDropdownMenu>
                   </MDBDropdown>
                 </MDBNavItem>
