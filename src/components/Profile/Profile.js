@@ -162,7 +162,7 @@ export default class UserProfile extends Component {
       <MDBRow>
         <MDBCol md="8">
           <MDBCard>
-          <MDBCardHeader className="form-header warm-flame-gradient rounded white-text">
+          <MDBCardHeader className="form-header orange rounded white-text">
            <h3 className="my-3" >
             <MDBIcon icon="user-edit"/> Update Profile
              </h3>

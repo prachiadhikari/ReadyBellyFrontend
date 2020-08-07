@@ -168,7 +168,7 @@ class NavbarM extends Component {
                        
                       )}
 
-                        <MDBNavLink as={Link} to="/profile"> 
+                        <MDBNavLink as={Link} to="/profilepage"> 
                       <MDBDropdownItem> 
                       <MDBIcon icon="user-circle"> {"  "}   
                          My Profile

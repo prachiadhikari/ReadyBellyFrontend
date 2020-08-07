@@ -173,53 +173,54 @@ export default class ProfilePage extends Component {
                                     width='250' height='250' src={`http://localhost:3023/${this.state.user.image_path}`}
                                     alt="profile" />
                 </MDBCard>
+                <h3 className="font-weight-bold blue-text">{this.state.user.fullname}</h3>
+                <MDBBtn color="warning" href="profile" style={{paddingRight:'15px',margin:"10px"}}><MDBIcon  className="red-text pr-3"  icon="user-edit"  />Profile Update</MDBBtn> 
                 </MDBCol>
                 <MDBCol sm="8">
-                  <MDBCard>
                     <MDBRow>
                       <MDBCol>
-                        <MDBCard style={{height:100}}>
-                        <h4>FullName: {this.state.user.fullname}</h4>
+                        <MDBCard style={{height:100,margin:"2%"}}>
+                        <h5 className="font-weight-bold green-text" style={{margin:"5%"}}>FullName: </h5>
+                        <h7 className="font-weight-bold blue-text" style={{marginLeft:"5%"}}>{this.state.user.fullname}</h7>
                         </MDBCard>
                       </MDBCol>
                       <MDBCol>
-                        <MDBCard style={{height:100}}>
-                        <h4>Address: {this.state.user.address}</h4>
+                        <MDBCard style={{height:100,margin:"2%"}}>
+                        <h4 className="font-weight-bold green-text" style={{margin:"5%"}}>Address: </h4><h7 className="font-weight-bold blue-text" style={{marginLeft:"5%"}}>{this.state.user.address1}</h7>
                         </MDBCard>
                       </MDBCol>
                     </MDBRow>
                     <MDBRow>
                       <MDBCol>
-                        <MDBCard style={{height:100}}>
-                        <h4>Phone number: {this.state.user.phone}</h4>
+                        <MDBCard style={{height:100,margin:"2%"}}>
+                        <h4 className="font-weight-bold green-text" style={{margin:"5%"}}> Phone number:</h4>
+                        <h7 className="font-weight-bold blue-text" style={{marginLeft:"5%"}}> 
+                         {this.state.user.phone}</h7>
                         </MDBCard>
                       </MDBCol>
                       <MDBCol>
-                        <MDBCard style={{height:100}}>
-                        <h4>Mobile Number: {this.state.user.mobile}</h4>
-                        </MDBCard>
-                      </MDBCol>
-                    </MDBRow>
-                    <MDBRow>
-                    <MDBCol>
-                        <MDBCard style={{height:100}}>
-                        <h4>Email: {this.state.user.email}</h4>
+                        <MDBCard style={{height:100,margin:"2%"}}>
+                        <h4 className="font-weight-bold green-text" style={{margin:"5%"}}>Mobile Number:</h4>
+                        <h7 className="font-weight-bold blue-text" style={{marginLeft:"5%"}}>  {this.state.user.mobile}</h7>
                         </MDBCard>
                       </MDBCol>
                     </MDBRow>
                     <MDBRow>
                     <MDBCol>
-                        <MDBCard style={{height:100}}>
-                        <h4>UserType: {this.state.user.user_type}</h4>
+                        <MDBCard style={{height:100,margin:"2%"}}>
+                        <p className="font-weight-bold green-text" style={{margin:"5%"}}>Email:
+                        <h7 className="font-weight-bold blue-text" style={{marginLeft:"5%"}}>  {this.state.user.email}</h7></p>
                         </MDBCard>
                       </MDBCol>
                     </MDBRow>
-                   
-                    Email:
-                    <hr/>
-                    UserType:
-                    <hr/>
-                  </MDBCard>
+                    <MDBRow>
+                    <MDBCol>
+                        <MDBCard style={{height:100,margin:"2%"}}>
+                        <p className="font-weight-bold green-text" style={{margin:"5%"}}>UserType: 
+                        <h7 className="font-weight-bold blue-text" style={{marginLeft:"5%"}}> {this.state.user.user_type}</h7></p> 
+                       </MDBCard>
+                      </MDBCol>
+                    </MDBRow>
                 </MDBCol>
               </MDBRow>
                        
