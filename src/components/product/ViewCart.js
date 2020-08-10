@@ -280,14 +280,14 @@ class ViewCart extends Component {
                   </div>
                   <div>
                       
-                     <center>{     
+                     {/* <center>{     
                              <StripeCheckout
                              onClick={this.bookFinal}
                              stripeKey="pk_test_mOUfpxsf7uHArKmrOzVHLXu700t9B02FOq"
                              
                              />
                       
-                     }</center>
+                     }</center> */}
                  </div>
                   </MDBCol>
                 </MDBCardBody>
