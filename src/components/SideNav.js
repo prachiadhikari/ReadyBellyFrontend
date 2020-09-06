@@ -28,7 +28,15 @@ import { MDBIcon } from "mdbreact";
 import { Container } from 'react-bootstrap';
 
 class SideNavv extends React.Component {
-   
+    handleLogout = (e) => {
+        e.preventDefault();
+        localStorage.removeItem("token");
+        localStorage.removeItem("userType");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("cart");
+        this.props.history.push("");
+        location.reload();
+      }; 
   
       render(){
   return (
@@ -90,7 +98,9 @@ class SideNavv extends React.Component {
                     <NavIcon>
                     <MDBIcon icon="sign-out-alt"  style={{ fontSize: '1.75em' }} />
                         </NavIcon> 
-                        <NavText>Logout</NavText>
+                        <NavText>
+                        <a onClick={this.handleLogout}>Logout</a>
+                        </NavText>
                     </NavItem>
                     
                    

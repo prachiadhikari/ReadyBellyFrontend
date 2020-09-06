@@ -66,29 +66,7 @@ class BookingList extends Component {
   }
 
 
-  deletePurchase = (purchaseId) => {
-    var x = confirm("You want to delete ?");
-    if (x) {
-      var headers = {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      };
-      Axios
-        .delete("http://localhost:3023/api/purchase/" + purchaseId, {
-          headers: headers,
-        })
-        .then((success) => {
-          location.reload();
-          toast.success("Successfully Deleted ");
 
-        })
-        .catch((err) => {
-          toast.error(err.response.data.message);
-        });
-    } else {
-      return false;
-    }
-  };
   cancelBooking = function(purchaseId, feedback){
     var headers = {
         "Content-Type": "application/json",
@@ -128,7 +106,7 @@ class BookingList extends Component {
         data.id= booking.id;
         data.status= 'CANCELED';
     } 
-
+    location.reload();
     console.log(data);
 
      axios
@@ -222,16 +200,7 @@ class BookingList extends Component {
                     onClick = {this.toggleFeedbackModal(purchase.id)}>  &nbsp;&nbsp;
                     Cancel &nbsp;&nbsp; </MDBBtn>
                           
-                     <a onClick={() => this.deletePurchase(purchase.id)}>
-                                          <img
-                                            style={{
-                                              height: "50px",
-                                              width: "50px",
-                                              borderRadius:"20px"
-                                            }}
-                                            src="./Image/delete.png"
-                                          />
-                                        </a>
+                     
                           </td>
  
                        
