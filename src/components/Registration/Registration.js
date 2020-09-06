@@ -353,6 +353,8 @@ class Registration extends React.Component {
                                                  {this.state.nameError}
                                                </Alert>
                                              ) : null}
+                                             <p style={{color:"red"}}>
+                                    If you are going to registered as VENDOR,</p><p style={{color:"red"}}> PLEASE enter you resturant name instead of your name </p>
                                            </FormGroup>
                                            <FormGroup>
                                              <MDBInput
@@ -527,25 +529,7 @@ class Registration extends React.Component {
                                                </Alert>
                                              ) : null}
                                            </FormGroup>
-                                           <FormGroup>
-                                             <MDBInput
-                                               className="black-text"
-                                               label="Restaurant Name"
-                                               icon="home"
-                                               name="restaurantname"
-                                               id="restaurantname"
-                                               value={this.state.restaurantname}
-                                               onChange={
-                                                 this.updateRegistrationValues
-                                               }
-                                               group
-                                               style={{ textAlign: "center" }}
-                                               type="text"
-                                               validate
-                                               error="wrong"
-                                               success="right"
-                                             />
-                                           </FormGroup>
+                                          
                                            <FormGroup>
                                              <div>
                                                <input

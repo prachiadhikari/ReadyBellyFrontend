@@ -113,9 +113,8 @@ class UserList extends Component {
           <h2 className="font-weight-bold  green-text " style={{ marginTop: "40px" }}>Registered Users</h2>
 
               <MDBCardBody>
-                 <MDBTable striped>
-                  <MDBTableHead color="primary-color" textWhite>
-                    <tr>
+                 <Table striped bordered hover>
+                  <thead><tr>
                      <th>Id</th>
                       <th>Profile Image</th>
                       <th>Email</th>
@@ -126,9 +125,8 @@ class UserList extends Component {
                       <th>User Type</th>
                       <th>Approved</th>
                       <th>Action</th>
-                </tr>
-              </MDBTableHead>
-            <MDBTableBody>
+                </tr></thead>
+            <tbody>
             {this.state.users.map((user, index) => (
                     <tr>
                       <td>{index + 1}</td>
@@ -170,8 +168,8 @@ class UserList extends Component {
                                         </a></td>
                     </tr>
                       ))}
-                   </MDBTableBody>
-                 </MDBTable>
+                   </tbody>
+                 </Table>
               </MDBCardBody>
           </MDBCol>
           </MDBRow>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom';
 import { Form, Card, NavItem, Nav, Col, Row, CardBody, FormGroup, Input, Button, Label, CustomInput, Container } from 'reactstrap'
 import { MDBContainer,  NavbarToggler,MDBCardHeader, MDBIcon, Collapse, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBView} from 'mdbreact'
 import Navigation from '../NavbarM'
@@ -126,7 +127,7 @@ export default class UserProfile extends Component {
     render() {
        if (this.state.user === null) {
             return <h3>Please Login First</h3>
-        }  
+        } 
           
           const{user}=this.state
             let $imagePreview = (
@@ -162,7 +163,7 @@ export default class UserProfile extends Component {
       <MDBRow>
         <MDBCol md="8">
           <MDBCard>
-          <MDBCardHeader className="form-header warm-flame-gradient rounded white-text">
+          <MDBCardHeader className="form-header orange rounded white-text">
            <h3 className="my-3" >
             <MDBIcon icon="user-edit"/> Update Profile
              </h3>
@@ -217,7 +218,9 @@ export default class UserProfile extends Component {
                                 <Input type='text' id='user_type'
                                     name='user_type'
                                     value={this.state.user.user_type}
-                                    onChange={(e) => this.handleChange(e)} />
+                                     />
+                                        <h6 style={{color:"red"}}>
+                                   This usertype can not be change. If you want create new account. </h6>
                             </FormGroup>
                              <FormGroup>
                                              <div>
