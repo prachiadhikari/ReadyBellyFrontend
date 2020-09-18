@@ -1,0 +1,13 @@
+
+
+body, html {
+    height: 100%;
+    }
+    .bg {
+    background-image: url("https://cdn.pixabay.com/photo/2012/04/13/21/29/apple-33709_960_720.png");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+    
