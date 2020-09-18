@@ -1,108 +1,215 @@
-
-import React,{ Component } from 'react';
-import ReactDOM from 'react-dom';
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import "bootstrap-css-only/css/bootstrap.min.css";
-import "mdbreact/dist/css/mdb.css";
- import
-'bootstrap-css-only/css/bootstrap.min.css';
- import
-'mdbreact/dist/css/mdb.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import{
-	BrowserRouter as Router,
-	Switch,
-	Link,
-	Route
-
-} from 'react-router-dom'
-import { ToastContainer, toast } from "react-toastify";
-import Axios from "axios";
+/* eslint-disable */
+import React from 'react'
+import { 
+  Container
+} from 'react-bootstrap'
+import Navigation from '../NavbarM'
+import Footer from '../Footer'
+import{ MDBRow, MDBCol, MDBCard, MDBCardBody, MDBBtn, MDBInput, MDBIcon} from 'mdbreact';
+import './Contact.css';
 import { FormGroup, Alert } from "reactstrap";
-import {  MDBRow,MDBContainer,MDBCardBody, MDBCol,MDBModalHeader, MDBCard,MDBInput, MDBIcon, MDBBtn } from "mdbreact";
+import Axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
-import Footer from '../Footer'
-import NavbarM from '../NavbarM'
 
 
+class Contact extends React.Component {
 
-class Contact extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-          message:"",
-          id:"",
-          config: {
-            headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-          },
-          redirect: false,
-          form: null,
+constructor(props){
+  super(props)
+
+
+  this.state = {
+   
+    redirect:false,
+     yourname:"",
+    youremail:"",
+    yourfeedback:"",
+    validationMessage:"",
+    nameError:"",
+     emailError:"",
+     feedbackError: "",
+
+  }
+}
+
+validate = () => {
+  let nameError = "";
+  let emailError = "";
+  let feedbackError = "";
+
+  if (!this.state.yourname) {
+nameError = "yourname cannot be empty";
+}
+if (!this.state.youremail.includes("@")) {
+emailError = "invalid email"
+}
+ if (!this.state.yourfeedback) {
+feedbackError = "yourfeedback cannot be empty";
+}
+
+if (nameError || emailError || feedbackError ) {
+this.setState({
+nameError,
+emailError,
+feedbackError,
+
+})
+return false;
+}
+return true;
+}
+
+ handleChange = (e) => {
+  this.setState({ [e.target.name]: e.target.value });
+ };
+
+updateContactValues = (e) => {
+ this.setState({ [e.target.name]: e.target.value });
+};
+
+
+  contactFinal = () => {
+
+    var data = {
+      yourname: this.state.yourname,
+      youremail: this.state.youremail,
+      yourfeedback: this.state.yourfeedback,
+    };
+
+    var headers = {
+      "Content-Type": "application/json",
+    };
+
+    Axios.post(
+      "http://localhost:3023/api/contact/add",
+     data,
+      headers
+    )
+      .then((response) => {
+        console.log(response.data);
+        if (response.status === 200) {
+          this.setState({ redirect: true });
         }
-    }
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+        toast.success("Your query sent Sucessfully", {
+          position: toast.POSITION.RIGHT,
+          
+        }); 
+      })
+      .catch((err) => {
+        if (err.data) {
+          console.log(err.data.message);
+          toast(err);
+        }
+      });
+   }
 
- 
-    render() {
+   contact = (e) =>{
+     e.preventDefault();
+     const isValid= this.validate();
+     if(isValid){
+       console.log(this.state)}
+       this.contactFinal();
+        location.reload();
+   }
 
-       
-        return (
 
-            <div>
-				<NavbarM/>
-                <MDBCard className="my-5 px-5 pb-5">
-    <section className="my-5">
-      <h2 className="h1-responsive font-weight-bold text-center my-5">
-        Contact us
+render(){
+  return(
+    <div>
+ <Container >
+  <Navigation />
+    <section className="my-5" >
+      <MDBRow >
+      <h2 className="h1-responsive font-weight-bold text-center my-5" style={{ marginLeft:"300px"}}>
+        Contact us for any query
       </h2>
-     
+      </MDBRow>
       <MDBRow>
-        <MDBCol lg="5" className="lg-0 mb-4">
-          <MDBCard>
+        <MDBCol lg="5" className="lg-0 mb-4" style={{ marginBottom:"200px"}}>
+          <MDBCard style={{height:"500px", marginTop:"2px"}}>
             <MDBCardBody>
-              <div className="form-header orange ">
-              <MDBModalHeader  className="form-header orange-color rounded"> <h3 className="white-text">
-         <MDBIcon icon="envelope" /> Write to Us
-       </h3></MDBModalHeader>
-              </div>
+             <ToastContainer />
+            <form onSubmit={this.contact} >
+                <h3 className="mt-2">
+                 Send Message Us
+                </h3>
               <p className="dark-grey-text">
-                We'll write rarely, but only the best content.
+                Get in touch.
               </p>
               <div className="md-form">
                 <MDBInput
-                  icon="user"
+                  icon="user" 
                   label="Your name"
                   iconClass="grey-text"
                   type="text"
-                  id="form-name"
+                  id="yourname"
+                  name="yourname" 
+                  value={this.state.yourname}
+                  onChange={
+                  this.updateContactValues
+                  }
                 />
+                {this.state.nameError
+                ? (
+                <Alert color="danger" size="sm" className="mt-2">
+                {this.state.nameError}</Alert>
+                )
+                : null}
+                
               </div>
               <div className="md-form">
                 <MDBInput
-                  icon="envelope"
+                  icon="envelope" 
                   label="Your email"
                   iconClass="grey-text"
-                  type="text"
-                  id="form-email"
+                  type="email"
+                  id="youremail"
+                  name="youremail" 
+                  value={this.state.youremail}
+                  onChange={
+                  this.updateContactValues
+                   }
                 />
+                {this.state.emailError
+                ? (
+                <Alert color="danger" size="sm" className="mt-2">
+                {this.state.emailError}</Alert>
+                )
+                : null}
+                
               </div>
               <div className="md-form">
                 <MDBInput
-                  icon="pencil-alt"
-                  label=" Enquiry"
+                  icon="tag"
+                  label="Your Feedback" 
                   iconClass="grey-text"
                   type="textarea"
-                  id="form-text"
+                  id="yourfeedback" 
+                  name="yourfeedback"
+                  value={this.state.yourfeedback}
+                  onChange={
+                  this.updateContactValues
+                  }
                 />
+                {this.state.feedbackError
+                ? (
+                <Alert color="danger" size="sm" className="mt-2">
+                {this.state.feedbackError}</Alert>
+                )
+                : null}
               </div>
               <div className="text-center">
-                <MDBBtn color="orange darken-4">
-                <MDBIcon far icon="paper-plane" />
-                Submit
-                </MDBBtn>
+              <MDBBtn
+              type="submit"
+              color="red"
+              onClick={this.contact}
+              className="btn-block z-depth-1a white-text">
+              Contact Us 
+              </MDBBtn>
               </div>
+              </form>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
@@ -112,8 +219,8 @@ class Contact extends Component {
             className="rounded z-depth-1-half map-container"
             style={{ height: "400px" }}
           >
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d76765.98321148289!2d-73.96694563267306!3d40.751663750099084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spl!2spl!4v1525939514494"
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.625208399643!2d85.3111801147092!3d27.69797643251131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19b2acafb947%3A0x3a9e89b8f3fd05d0!2sCity%20Sports!5e0!3m2!1sen!2snp!4v1592299144398!5m2!1sen!2snp"
+
               title="This is a unique title"
               width="100%"
               height="100%"
@@ -124,36 +231,38 @@ class Contact extends Component {
           <br />
           <MDBRow className="text-center">
             <MDBCol md="4">
-              <MDBBtn tag="a" floating color="blue" className="accent-1">
-              <MDBIcon icon="map-marker-alt" />
+              <MDBBtn tag="a" floating color="red accent-2" className="accent-1">
+                <MDBIcon icon="map-marker-alt" />
               </MDBBtn>
-              <p>Dillibazar</p>
-              <p className="mb-md-0">Kathmandu</p>
+              <p>Kathmandu, Maitidevi 44600</p>
+              <p className="mb-md-0">Nepal</p>
             </MDBCol>
             <MDBCol md="4">
-              <MDBBtn tag="a" floating color="blue" className="accent-1">
+             
+               <MDBBtn tag="a" floating color="red accent-2" className="accent-1">
                 <MDBIcon icon="phone" />
               </MDBBtn>
-              <p>9876549987</p>
-              <p className="mb-md-0">Everyday, 24 hrs</p>
+             
+              <p>+ 977 984 456 2871</p>
+              <p className="mb-md-0">Mon - Fri, 8:00-22:00</p>
             </MDBCol>
             <MDBCol md="4">
-              <MDBBtn tag="a" floating color="blue" className="accent-1">
+               <MDBBtn tag="a" floating color="red accent-2" className="accent-1">
                 <MDBIcon icon="envelope" />
               </MDBBtn>
-              <p>readybelly@gmail.com</p>
-              <p className="mb-md-0">sale@gmail.com</p>
+              <p>sports@gmail.com</p>
+              <p className="mb-md-0">citysports@gmail.com</p>
             </MDBCol>
           </MDBRow>
         </MDBCol>
       </MDBRow>
     </section>
-
-                </MDBCard>
-				<Footer/>
-            </div>
-        )
-    }
+    </Container>
+     <Footer />
+     </div>
+  );
+}
 }
 
-export default Contact;
+export default Contact
+
