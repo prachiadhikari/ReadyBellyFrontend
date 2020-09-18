@@ -1,7 +1,7 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import StripeCheckout from 'react-stripe-checkout'
-
 import { Button, Table } from "react-bootstrap";
 import { toast } from "react-toastify";
 import {
@@ -18,18 +18,19 @@ import {
   MDBTableHead,
   MDBInput,
   MDBBtn,
+  MDBCollapse,
+  MDBCardHeader
 } from "mdbreact";
 import Navigation from "../NavbarM";
 import Footer from "../Footer";
 import Feedback from "../FeedbackPage";
 import CollectionEmpty from "../CollectionEmpty";
-
-
 import Axios from "axios";
 
 class UserBookingList extends Component {
   state = {
     isOpen: false,
+    collapseID: ""
   };
 
   toggleCollapse = () => {
@@ -70,6 +71,21 @@ class UserBookingList extends Component {
     this.getAllBookings();
   }
 
+  
+groupAndGetFinalPurchase = (purchases) => {
+  const purchaseMap = new Map();
+  purchases.forEach(purchase => {
+    var finalPurchase =  purchaseMap.get(purchase.createdAt);
+    if (!finalPurchase) {
+      finalPurchase = [];
+      finalPurchase.push(purchase);
+      purchaseMap.set(purchase.createdAt, finalPurchase);
+    } else {
+      finalPurchase.push(purchase);
+    }
+  });
+  return purchaseMap;
+}
 
 cancelBooking = function(purchaseId, feedback){
     var headers = {
@@ -98,13 +114,54 @@ getAllBookings = () => {
   Axios.get("http://localhost:3023/api/purchase/by/user/all", {headers: headers})
       .then((res) => {
         console.log(res.data);
+        var products = res.data.products;
+        var purchaseMap = this.groupAndGetFinalPurchase(products);
+        /*
+         * Converting to object literal
+        */
+        var purchaseObjectLiteral = Array.from(purchaseMap).reduce((obj, [key, value]) => (
+          Object.assign(obj, { [key]: value }) 
+        ), {});
+        console.log(purchaseObjectLiteral);
         this.setState({
-          purchases: res.data.products,
+          purchases: purchaseObjectLiteral,
         });
       })
       .catch((err) => {
         toast.error(err.response.data.message);
       });
+}
+
+downloadInvoice = (createdAt) => () => {
+  var headers = {
+    Authorization: "Bearer " + localStorage.getItem("token"),
+  };
+
+  Axios.get(
+    "http://localhost:3023/api/purchase/generate-invoice/" +
+      localStorage.getItem("userId") +
+      "/" +
+      createdAt,
+    { responseType: "blob", headers: headers })
+    .then((res) => {
+      const url = window.URL.createObjectURL(new Blob([res.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "invoice.pdf"); //or any other extension
+      document.body.appendChild(link);
+      link.click();
+      console.log(res.data);
+      console.log("Invoice Generated");
+    })
+    .catch((err) => {
+      toast.error(err.response.data.message);
+    });
+};
+
+toggleCollapseList = collapseID => () => {
+  this.setState(prevState => ({
+    collapseID: prevState.collapseID !== collapseID ? collapseID : ""
+  }));
 }
 
   render() {
@@ -118,68 +175,106 @@ getAllBookings = () => {
         <MDBContainer fluid>
           <Navigation />
           <h2 style={{ marginTop: "40px" }}>Your Booked Products</h2>
-
           <MDBRow>
             <MDBCard style={{ width: "100%" }}>
               <MDBCardBody>
                 <MDBCol sm="12">
                   <MDBBtn color="success">Cash on Delivery</MDBBtn>
+                  <StripeCheckout stripeKey="pk_test_mOUfpxsf7uHArKmrOzVHLXu700t9B02FOq" />
 
                   {
-                    <StripeCheckout stripeKey="pk_test_mOUfpxsf7uHArKmrOzVHLXu700t9B02FOq" />
-                  }
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>Id</th>
-                        <th>Product Image</th>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Status</th>
-                        <th>Vendor Remarks</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {this.state.purchases.map((purchase, index) => (
-                        <tr>
-                          <td>{index + 1}</td>
-                          <td>
-                            <img
-                              className="img-fluid z-depth-0"
-                              style={{ height: "100px", width: "100px" }}
-                              src={this.state.path + purchase.product.image}
-                            />
-                          </td>
-                          <td>{purchase.product.name}</td>
-                          <td>{purchase.price} /-</td>
-                          <td>{purchase.quantity}</td>
-                          <td> {purchase.status}</td>
-                          <td> {purchase.vendorRemarks}</td>
+                  Object.keys(this.state.purchases).map((createdAt, i) => 
+                  (
+                    <div>
+                      <MDBCard style={{ marginTop: "1rem" }}>
+                      <MDBCardHeader color="unique-color">
+                      {new Date(createdAt).toLocaleDateString()} - {new Date(createdAt).toISOString().substr(11, 8)}
 
-                          <td>
-                            <MDBBtn
-                              color="danger"
-                              style={{
-                                paddingRight: "15px",
-                                display:(
-                                  purchase.status === "CANCELED" ||
-                                  purchase.status === "DELIVERED" ||
-                                  purchase.status === "PROCESSING")
-                                    ? "none"
-                                    : "block",
-                              }}
-                              onClick={this.toggleFeedbackModal(purchase.id)}
-                            >
+                        <MDBBtn
+                          color="primary"
+                          onClick={this.toggleCollapseList("basicCollapse" + createdAt)}
+                          style={{ marginBottom: "1rem", float: "right" }}
+                        >
+                          View Purchases
+                        </MDBBtn>
+                      {
+                        this.state.purchases[createdAt].every(purchase => purchase.status === "DELIVERED" || purchase.status === "CANCELED") ?
+                        (<MDBBtn
+                          color="success"
+                          style={{ marginBottom: "1rem", float: "right" }}
+                          onClick={this.downloadInvoice(createdAt)}
+                        >
+                          Generate Bill
+                        </MDBBtn>) : null
+                      }
+                      </MDBCardHeader>
+                      <MDBCardBody style={{paddingBottom: "0px"}}>
+                      <MDBCollapse id={"basicCollapse" + createdAt} isOpen={this.state.collapseID}>
+                    <Table striped bordered hover>
+                     <thead>
+                       <tr>
+                         <th>Id</th>
+                         <th>Product Image</th>
+                         <th>Product Name</th>
+                         <th>Price</th>
+                         <th>Quantity</th>
+                         <th>Status</th>
+                         <th>Vendor Remarks</th>
+                         <th>Action</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       {
+                     this.state.purchases[createdAt].map( (purchase, index) => 
+                          (
+                         <tr>
+                           <td>{index + 1}</td>
+                           <td>
+                             <img
+                               className="img-fluid z-depth-0"
+                               style={{ height: "100px", width: "100px" }}
+                               src={this.state.path + purchase.product.image}
+                             />
+                           </td>
+                           <td>{purchase.product.name}</td>
+                           <td>{purchase.price} /-</td>
+                           <td>{purchase.quantity}</td>
+                           <td> {purchase.status}</td>
+                           <td> {purchase.vendorRemarks}</td>
+
+                           <td>
+                             <MDBBtn
+                               color="danger"
+                               style={{
+                                 paddingRight: "15px",
+                                 display:(
+                                   purchase.status === "CANCELED" ||
+                                   purchase.status === "DELIVERED" ||
+                                   purchase.status === "PROCESSING")
+                                     ? "none"
+                                     : "block",
+                               }}
+                               onClick={this.toggleFeedbackModal(purchase.id)}
+                             >
                               &nbsp;&nbsp;
-                            Cancel &nbsp;&nbsp;
-                            </MDBBtn>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table>
+                             Cancel &nbsp;&nbsp;
+                             </MDBBtn>
+                           </td>
+                         </tr>
+                         ))
+                        }
+                     </tbody>
+                   </Table>
+                            </MDBCollapse>
+                  
+                      </MDBCardBody>
+                      </MDBCard>
+                      
+                    
+                            
+                      </div>
+                  )
+                    )}
                 </MDBCol>
               </MDBCardBody>
             </MDBCard>
