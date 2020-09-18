@@ -74,6 +74,33 @@ class ProductPage extends React.Component {
       viewcart: !this.state.viewcart,
     });
   };
+  searchProduct = (event) => {
+    axios
+      .get("http://localhost:3023/api/product/searchProduct/" + event.target.value)
+      .then((success) => {
+        this.setState({products: success.data});
+        console.log(success)
+
+      })
+      .catch((err) => {
+       console.log(err)
+      });
+};
+
+search = (searchText) => {
+  axios
+      .get("http://localhost:3023/api/product/searchProduct/" + searchText)
+      .then((res) => {
+        console.log(res.data.products);
+        this.setState({
+          products: res.data.products,
+          path: "http://localhost:3023/uploads/",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+}
 
   constructor(props) {
     super(props);
@@ -100,8 +127,14 @@ class ProductPage extends React.Component {
   }
 
   render() {
-    if (this.state.products.length > 0) {
-      console.log("inside products");
+    const elementStyle ={
+      borderRadius:'10px',
+      width: "100%",
+      marginLeft: "0px",
+      marginBottom: "30px",
+      border: "1px solid orange",
+      height: "40px",
+    }
       return (
         <MDBContainer style={{ marginTop: "40px" }} fluid>
           <MDBRow>
@@ -149,6 +182,16 @@ class ProductPage extends React.Component {
           </MDBRow>
           <MDBRow>
             <MDBCol sm="12">
+            <input type="text" 
+      placeholder="Enter product to be searched" 
+      style={elementStyle} 
+      onChange={this.searchProduct}
+      //onClick={() => this.searchProduct(product.search)}
+       />
+            </MDBCol>
+          </MDBRow>
+          <MDBRow>
+            <MDBCol sm="12">
               {this.state.viewcart && (
                 <ViewCart style={{ marginTop: "100px" }} />
               )}
@@ -156,7 +199,13 @@ class ProductPage extends React.Component {
           </MDBRow>
           <MDBRow>
             <MDBCol sm="12">
-              <ViewProducts products={this.state.products} />
+            {this.state.products.length > 0 ? (
+              <ViewProducts
+                key={this.state.products[0].name}
+                products={this.state.products}
+              />) : (
+               <ProductEmpty/>
+              )}
             </MDBCol>
           </MDBRow>
           <MDBRow>
@@ -173,10 +222,7 @@ class ProductPage extends React.Component {
           <Footer />
         </MDBContainer>
       );
-    } else {
-      console.log("Products!!!!!");
-      return (<ProductEmpty/>);
-    }
+ 
   }
 }
 export default ProductPage;

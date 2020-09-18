@@ -11,7 +11,7 @@ import Index from "./components/Index";
 import Registration from "./components/Registration/Registration";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
-
+import TopSeller from "./components/TopSeller/TopSeller";
 import UpdateProduct from "./components/AddProduct/UpdateProduct";
 import ProductPage from "./components/product/ProductPage";
 import Authorization from './components/Authorization';
@@ -50,6 +50,9 @@ class App extends React.Component {
 
           <Route exact path="/registration">
             <Registration />
+          </Route>
+          <Route exact path="/seller">
+            <TopSeller />
           </Route>
           <Route exact path="/about">
             <About />

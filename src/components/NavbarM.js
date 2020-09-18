@@ -111,6 +111,11 @@ class NavbarM extends Component {
                 </MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
+                <MDBNavLink as={Link} to="/seller">
+                  Top Seller
+                </MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
                 <MDBNavLink as={Link} to="/products">
                   Products
                 </MDBNavLink>
