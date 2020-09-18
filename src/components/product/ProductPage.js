@@ -8,6 +8,10 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownItem,
+  MDBDropdownMenu,
   MDBModalBody,
   MDBModal,
   Link,
@@ -101,7 +105,33 @@ search = (searchText) => {
         console.log(err);
       });
 }
-
+sort = (type, order) => {
+  var unOrderedProducts = this.state.products;
+  var orderedProducts;
+  console.log(unOrderedProducts);
+  if (type === "VENDOR") {
+    if (order === "DESC") {
+      orderedProducts = unOrderedProducts.sort((b, a) =>
+        a.user.fullname.localeCompare(b.user.fullname)
+      );
+    } else {
+      orderedProducts = unOrderedProducts.sort((a, b) =>
+        a.user.fullname.localeCompare(b.user.fullname)
+      );
+    }
+  } else if (type === "PRODUCT_NAME") {
+    if ((order = "DESC")) {
+      orderedProducts = unOrderedProducts.sort((b, a) =>
+        a.name.localeCompare(b.name)
+      );
+    } else {
+      orderedProducts = unOrderedProducts.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+    }
+  }
+  this.setState({ products: unOrderedProducts });
+};
   constructor(props) {
     super(props);
     this.state = {
@@ -145,6 +175,23 @@ search = (searchText) => {
           <MDBRow>
             <MDBCol sm="9">
               <h1 className="font-weight-bold black-text">MENUS</h1>
+              <div>
+                <MDBDropdown>
+                  <MDBDropdownToggle caret color="primary">
+                    Sort By
+                  </MDBDropdownToggle>
+                  <MDBDropdownMenu basic>
+                    <MDBDropdownItem onClick={() => this.sort("VENDOR", "ASC")}>
+                      Vendor (Asc)
+                    </MDBDropdownItem>
+                    <MDBDropdownItem
+                      onClick={() => this.sort("VENDOR", "DESC")}
+                    >
+                      Vendor (Desc)
+                    </MDBDropdownItem>
+                  </MDBDropdownMenu>
+                </MDBDropdown>
+              </div>
             </MDBCol>
             {this.state.isLoggedInUserVendor ? (
               <MDBCol sm="3">
