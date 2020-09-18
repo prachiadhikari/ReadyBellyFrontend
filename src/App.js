@@ -27,7 +27,7 @@ import Pay from "./components/Booking/Pay";
 import BookingList from "./components/Booking/BookingList";
 import Profile from "./components/Profile/Profile";
 import Profilepage from "./components/Profile/Profilepage";
-import ViewContact from "./components/ContactUs/ViewContact";
+import ViewContact from "./components/Contact/ViewContact";
 
 
 import UserBookingList from "./components/Booking/UserBookingList";
@@ -55,7 +55,7 @@ class App extends React.Component {
           <Route exact path="/seller">
             <TopSeller />
           </Route>
-          
+
           <Route exact path="/about">
             <About />
           </Route>
