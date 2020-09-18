@@ -55,6 +55,7 @@ class App extends React.Component {
           <Route exact path="/seller">
             <TopSeller />
           </Route>
+          
           <Route exact path="/about">
             <About />
           </Route>
