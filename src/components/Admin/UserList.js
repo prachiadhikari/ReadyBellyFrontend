@@ -105,16 +105,20 @@ class UserList extends Component {
       <div>
         <MDBContainer fluid>
           <Navigation />
-          <MDBRow style={{marginBottom:"-1%"}}>
-            <MDBCol size="2">
+          {/* <MDBRow style={{marginBottom:"-1%"}}> */}
+            {/* <MDBCol size="2">
             <SideNavv/>
-            </MDBCol>
-            <MDBCol size="6">
-          <h2 className="font-weight-bold  green-text " style={{ marginTop: "40px" }}>Registered Users</h2>
-
+            </MDBCol> */}
+            {/* <MDBCol size="6"> */}
+          <h2 className="font-weight-bold  special-color-dark-text " style={{ marginTop: "40px" }}>Registered Users</h2>
+              
+          <MDBRow>
+            <MDBCard style={{ width: "100%" }}>
               <MDBCardBody>
-                 <Table striped bordered hover>
-                  <thead><tr>
+                <MDBCol sm="12">
+                 <MDBTable striped>
+                  <MDBTableHead color="unique-color-dark" textWhite>
+                    <tr>
                      <th>Id</th>
                       <th>Profile Image</th>
                       <th>Email</th>
@@ -125,8 +129,9 @@ class UserList extends Component {
                       <th>User Type</th>
                       <th>Approved</th>
                       <th>Action</th>
-                </tr></thead>
-            <tbody>
+                </tr>
+              </MDBTableHead>
+            <MDBTableBody>
             {this.state.users.map((user, index) => (
                     <tr>
                       <td>{index + 1}</td>
@@ -142,36 +147,15 @@ class UserList extends Component {
                        <td>{user.user_type}</td>
                        <td>{user.isApproved === true ? "Approved": "Unapproved"}</td>
                        <td>
-                         {user.isApproved === true || user.user_type !== "VENDOR"? null : (
-                         
-                         <a onClick={() => this.approveUser(user.id)}>
-                         <img
-                           style={{
-                             height: "50px",
-                             width: "60px",
-                             borderRadius:"20px"
-                           }}
-                           src="./Image/approve.png"
-                         />
-                       </a>
-                        
-                             )} &nbsp;
-                         <a onClick={() => this.deleteUser(user.id)}>
-                                          <img
-                                            style={{
-                                              height: "50px",
-                                              width: "50px",
-                                              borderRadius:"20px"
-                                            }}
-                                            src="./Image/remove.png"
-                                          />
-                                        </a></td>
+                         {user.isApproved === true || user.user_type !== "VENDOR"? null : (<MDBBtn color="warning" className="white-text" onClick={() => this.approveUser(user.id)}> Approve User </MDBBtn>)} &nbsp;
+                                               <MDBBtn color=" red darken-4" onClick={() => this.deleteUser(user.id)}> Remove User </MDBBtn></td>
                     </tr>
                       ))}
-                   </tbody>
-                 </Table>
+                   </MDBTableBody>
+                 </MDBTable>
+                </MDBCol>
               </MDBCardBody>
-          </MDBCol>
+            </MDBCard>
           </MDBRow>
         </MDBContainer>
         <Footer />

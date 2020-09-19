@@ -311,7 +311,7 @@ class Registration extends React.Component {
                                 <MDBCol md="10"> 
                                <MDBCardHeader
                               
-                                 className="form-header orange rounded white-text"
+                                 className="form-header unique-color-dark rounded white-text"
                                  
                                >
                                  <h3 className="my-3" >
@@ -553,7 +553,7 @@ class Registration extends React.Component {
                                          <div className="text-center py-6 mt-6">
                                            <MDBBtn
                                              type="submit"
-                                             color="red"
+                                             color=" green darken-4"
                                              onClick={this.register}
                                              className="btn-block z-depth-1a white-text"
                                            >

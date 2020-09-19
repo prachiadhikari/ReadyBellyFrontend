@@ -84,15 +84,14 @@ class NavbarM extends Component {
 
     let view = (
       <MDBContainer>
-        <MDBNavbar color="orange accent-2" dark expand="md" scrolling fixed="top">
+        <MDBNavbar color="unique-color" dark expand="md" scrolling fixed="top">
           <MDBCol sm="2">
             <MDBNavbarBrand href="/">
               <strong className="white-text">READYBELLY</strong>
             </MDBNavbarBrand>
           </MDBCol>
-          {this.state.isAdmin ? (  
-          <MDBCol sm="4"></MDBCol>
-          ):(
+         
+         
             <MDBCol sm="4">
             <MDBNavbarNav>
               <MDBNavItem active>
@@ -121,18 +120,9 @@ class NavbarM extends Component {
                 </MDBNavLink>
               </MDBNavItem>
             </MDBNavbarNav>
-          </MDBCol> )}
-          {this.state.isAdmin ? ( <MDBCol sm="4"></MDBCol> 
-          ):(<MDBCol sm="4">
-          <div className="active-pink-3 active-pink-4">
-            <input
-              className="form-control"
-              type="text"
-              placeholder="Search"
-              aria-label="Search"
-            />
-          </div>
-        </MDBCol>)}
+          </MDBCol> <MDBCol sm="4">
+          
+        </MDBCol>
         <MDBCol sm="2">
             <MDBNavbarNav>
               {!this.state.isLoggedIn ? (

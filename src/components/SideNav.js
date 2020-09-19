@@ -24,7 +24,7 @@ import{
 
 } from 'react-router-dom'
 
-import { MDBIcon } from "mdbreact";
+import { MDBIcon,MDBNavLink } from "mdbreact";
 import { Container } from 'react-bootstrap';
 
 class SideNavv extends React.Component {
@@ -47,7 +47,7 @@ class SideNavv extends React.Component {
     <Route render={({ location, history }) => (
         <React.Fragment>
             <SideNav
-            style={{backgroundColor:"orange",
+            style={{backgroundColor:"#3F729B",
             marginTop:"5%",height:"100%"}}
             >
                 <SideNav.Toggle onSelect={(selected) => {
@@ -56,24 +56,16 @@ class SideNavv extends React.Component {
                         history.push(to);
                     }
                 }} />
-                <SideNav.Nav defaultSelected="home">
+                <SideNav.Nav defaultSelected="utensils">
+                   
+                    
                     <NavItem eventKey="">
-                        <NavIcon>
-                        <MDBIcon icon="home"  style={{ fontSize: '1.75em' }} />
-                        </NavIcon>
-                        <NavText>Dashboard</NavText>
-                    </NavItem>
-                    <NavItem eventKey="">
-                    <NavIcon>
-                        <MDBIcon icon="utensils"  style={{ fontSize: '1.75em' }} />
-                        </NavIcon> 
-                        <NavText>Orders</NavText>
-                    </NavItem>
-                    <NavItem eventKey="">
+                   
                     <NavIcon>
                     <MDBIcon icon="align-justify"   style={{ fontSize: '1.75em' }} />
                         </NavIcon> 
                         <NavText>Menus</NavText>
+                       
                     </NavItem>
                     <NavItem eventKey="">
                     <NavIcon>
