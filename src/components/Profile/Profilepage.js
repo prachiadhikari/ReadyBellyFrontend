@@ -3,6 +3,8 @@ import axios from 'axios'
 import { Form, Card, NavItem, Nav, Col, Row, CardBody, FormGroup, Input, Button, Label, CustomInput, Container } from 'reactstrap'
 import { MDBContainer,  NavbarToggler,MDBCardHeader, MDBIcon, Collapse, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBView} from 'mdbreact'
 import Navigation from '../NavbarM'
+import { BrowserRouter as Router, Link, Redirect } from "react-router-dom";
+
 import Footer from '../Footer'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -159,7 +161,7 @@ export default class ProfilePage extends Component {
                   
              <MDBCard className="my-5 px-5 pb-5">
      
-          <MDBCardHeader className="form-header orange accent-2 rounded white-text">
+          <MDBCardHeader style={{width:"100%"}} className="form-header unique-color-dark rounded white-text">
            <h3 className="my-3" >
             <MDBIcon icon="user"/> Your Profile
              </h3>
@@ -173,54 +175,65 @@ export default class ProfilePage extends Component {
                                     width='250' height='250' src={`http://localhost:3023/${this.state.user.image_path}`}
                                     alt="profile" />
                 </MDBCard>
-                <h3 className="font-weight-bold blue-text">{this.state.user.fullname}</h3>
-                <MDBBtn color="warning" href="profile" style={{paddingRight:'15px',margin:"10px"}}><MDBIcon  className="red-text pr-3"  icon="user-edit"  />Profile Update</MDBBtn> 
+                <h3 className="font-weight-bold unique-color-dark-text">{this.state.user.fullname}</h3>
+              <p><Link to="profile"><MDBIcon  icon="camera"  href="profile" style={{paddingRight:'15px',margin:"10px"}}>Change  picture</MDBIcon> </Link> 
+              </p>
+              <p><Link to="profile"><MDBIcon  icon="key"  href="profile" style={{paddingRight:'15px',marginRight:"10px"}}>Change  password</MDBIcon> </Link> 
+              </p>
                 </MDBCol>
                 <MDBCol sm="8">
-                    <MDBRow>
-                      <MDBCol>
-                        <MDBCard style={{height:100,margin:"2%"}}>
-                        <h5 className="font-weight-bold green-text" style={{margin:"5%"}}>FullName: </h5>
-                        <h7 className="font-weight-bold blue-text" style={{marginLeft:"5%"}}>{this.state.user.fullname}</h7>
-                        </MDBCard>
-                      </MDBCol>
-                      <MDBCol>
-                        <MDBCard style={{height:100,margin:"2%"}}>
-                        <h4 className="font-weight-bold green-text" style={{margin:"5%"}}>Address: </h4><h7 className="font-weight-bold blue-text" style={{marginLeft:"5%"}}>{this.state.user.address1}</h7>
-                        </MDBCard>
-                      </MDBCol>
-                    </MDBRow>
-                    <MDBRow>
-                      <MDBCol>
-                        <MDBCard style={{height:100,margin:"2%"}}>
-                        <h4 className="font-weight-bold green-text" style={{margin:"5%"}}> Phone number:</h4>
-                        <h7 className="font-weight-bold blue-text" style={{marginLeft:"5%"}}> 
-                         {this.state.user.phone}</h7>
-                        </MDBCard>
-                      </MDBCol>
-                      <MDBCol>
-                        <MDBCard style={{height:100,margin:"2%"}}>
-                        <h4 className="font-weight-bold green-text" style={{margin:"5%"}}>Mobile Number:</h4>
-                        <h7 className="font-weight-bold blue-text" style={{marginLeft:"5%"}}>  {this.state.user.mobile}</h7>
-                        </MDBCard>
-                      </MDBCol>
-                    </MDBRow>
+                 
                     <MDBRow>
                     <MDBCol>
-                        <MDBCard style={{height:100,margin:"2%"}}>
-                        <p className="font-weight-bold green-text" style={{margin:"5%"}}>Email:
-                        <h7 className="font-weight-bold blue-text" style={{marginLeft:"5%"}}>  {this.state.user.email}</h7></p>
-                        </MDBCard>
+                    <Form>
+                            <FormGroup>
+                                <Label for='fullname'>Fullname</Label>
+                                <Input type='text'
+                                    id="fullname"
+                                    name='fullname'
+                                    value={this.state.user.fullname}
+                                    onChange={(e) => this.handleChange(e)}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for='address1'>Address</Label>
+                                <Input type='text' id='address1'
+                                    name='address1'
+                                    value={this.state.user.address1}
+                                    onChange={(e) => this.handleChange(e)} />
+                            </FormGroup>
+                             <FormGroup>
+                                <Label for='phone'>Phone Number</Label>
+                                <Input type='text' id='phone'
+                                    name='phone'
+                                    value={this.state.user.phone}
+                                    onChange={(e) => this.handleChange(e)} />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for='mobile'>Mobile Number</Label>
+                                <Input type='text' id='mobile'
+                                    name='mobile'
+                                    value={this.state.user.mobile}
+                                    onChange={(e) => this.handleChange(e)} />
+                            </FormGroup>
+                             <FormGroup>
+                                <Label for='email'>Email</Label>
+                                <Input type='text' id='email'
+                                    name='email'
+                                    value={this.state.user.email}
+
+                                    />
+
+                                    <h6 style={{color:"red"}}>
+                                     The address used to identify your ReadyBelly Account to you and others. You can't change this email address.
+                                     </h6>
+                            </FormGroup>
+                            <Button color='green darken-4' onClick={this.uploadImageAndUpdate} block>Update User</Button>
+
+                            </Form>
                       </MDBCol>
                     </MDBRow>
-                    <MDBRow>
-                    <MDBCol>
-                        <MDBCard style={{height:100,margin:"2%"}}>
-                        <p className="font-weight-bold green-text" style={{margin:"5%"}}>UserType: 
-                        <h7 className="font-weight-bold blue-text" style={{marginLeft:"5%"}}> {this.state.user.user_type}</h7></p> 
-                       </MDBCard>
-                      </MDBCol>
-                    </MDBRow>
+                    
                 </MDBCol>
               </MDBRow>
                        

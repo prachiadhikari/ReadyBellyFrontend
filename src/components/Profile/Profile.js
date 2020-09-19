@@ -163,65 +163,16 @@ export default class UserProfile extends Component {
       <MDBRow>
         <MDBCol md="8">
           <MDBCard>
-          <MDBCardHeader className="form-header orange rounded white-text">
+          <MDBCardHeader className="form-header unique-color-dark  rounded white-text">
            <h3 className="my-3" >
-            <MDBIcon icon="user-edit"/> Update Profile
+            <MDBIcon icon="user-edit"/> Update Photo
              </h3>
                                 
            </MDBCardHeader>
             <MDBCardBody>
                         <Form>
-                            <FormGroup>
-                                <Label for='fullname'>Fullname</Label>
-                                <Input type='text'
-                                    id="fullname"
-                                    name='fullname'
-                                    value={this.state.user.fullname}
-                                    onChange={(e) => this.handleChange(e)}
-                                />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for='address1'>Address</Label>
-                                <Input type='text' id='address1'
-                                    name='address1'
-                                    value={this.state.user.address1}
-                                    onChange={(e) => this.handleChange(e)} />
-                            </FormGroup>
-                             <FormGroup>
-                                <Label for='phone'>Phone Number</Label>
-                                <Input type='text' id='phone'
-                                    name='phone'
-                                    value={this.state.user.phone}
-                                    onChange={(e) => this.handleChange(e)} />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for='mobile'>Mobile Number</Label>
-                                <Input type='text' id='mobile'
-                                    name='mobile'
-                                    value={this.state.user.mobile}
-                                    onChange={(e) => this.handleChange(e)} />
-                            </FormGroup>
-                             <FormGroup>
-                                <Label for='email'>Email</Label>
-                                <Input type='text' id='email'
-                                    name='email'
-                                    value={this.state.user.email}
-
-                                    />
-
-                                    <h6 style={{color:"red"}}>
-                                     The address used to identify your ReadyBelly Account to you and others. You can't change this email address.
-                                     </h6>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for='user_type'>UserType</Label>
-                                <Input type='text' id='user_type'
-                                    name='user_type'
-                                    value={this.state.user.user_type}
-                                     />
-                                        <h6 style={{color:"red"}}>
-                                   This usertype can not be change. If you want create new account. </h6>
-                            </FormGroup>
+                           
+      
                              <FormGroup>
                                              <div>
                                              <img className='img-thumbnail'
@@ -243,7 +194,7 @@ export default class UserProfile extends Component {
                                                />{" "}
                                              </div>
                                            </FormGroup>
-                            <Button color='danger' onClick={this.uploadImageAndUpdate} block>Update User</Button>
+                            <Button color='green' onClick={this.uploadImageAndUpdate} block>Update User</Button>
 
 
                             </Form>

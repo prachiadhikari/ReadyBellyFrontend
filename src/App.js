@@ -26,6 +26,8 @@ import ViewCart from "./components/product/ViewCart";
 import Pay from "./components/Booking/Pay";
 import BookingList from "./components/Booking/BookingList";
 import Profile from "./components/Profile/Profile";
+import Password from "./components/Profile/ChangePassword";
+
 import Profilepage from "./components/Profile/Profilepage";
 import ViewContact from "./components/Contact/ViewContact";
 
@@ -92,6 +94,9 @@ class App extends React.Component {
           </Route>
           <Route exact path="/profile">
             <Profile />
+          </Route>
+          <Route exact path="/passwordchange">
+            <Password />
           </Route>
 	 <Route exact path="/userlist">
             <UserList />

@@ -175,6 +175,7 @@ sort = (type, order) => {
           <MDBRow>
             <MDBCol sm="9">
               <h1 className="font-weight-bold black-text">MENUS</h1>
+              {!this.state.isLoggedInUserVendor ? (
               <div>
                 <MDBDropdown>
                   <MDBDropdownToggle caret color="primary">
@@ -191,7 +192,7 @@ sort = (type, order) => {
                     </MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>
-              </div>
+              </div> ) : null}
             </MDBCol>
             {this.state.isLoggedInUserVendor ? (
               <MDBCol sm="3">

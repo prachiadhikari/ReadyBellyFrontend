@@ -114,7 +114,7 @@ export default class Login extends Component {
               }}
             >
               <MDBCardHeader
-                className="form-header orange rounded white-text"
+                className="form-header unique-color-dark rounded white-text"
                 style={{ width: "100%" }}
               >
                 <h3 className="my-3">
@@ -171,7 +171,7 @@ export default class Login extends Component {
                   <div className="text-center py-6 mt-6">
                     <MDBBtn
                       type="submit"
-                      color="red accent-2"
+                      color=" green darken-4"
                       className="btn-block z-depth-1a white-text"
                       onClick={this.submitForm}
                     >
