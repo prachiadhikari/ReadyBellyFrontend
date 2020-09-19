@@ -189,7 +189,13 @@ class NavbarM extends Component {
                            </MDBIcon>
                       </MDBDropdownItem>
                       </MDBNavLink>
-
+                      <MDBNavLink as={Link} to="/viewcontact"> 
+                      <MDBDropdownItem> 
+                      <MDBIcon icon="comment"> {"  "}   
+                         Queries
+                           </MDBIcon>
+                      </MDBDropdownItem>
+                      </MDBNavLink> 
                       <MDBDropdownItem href="#">
                         <MDBIcon icon="sign-in-alt">
                         <a onClick={this.handleLogout}>Logout</a>

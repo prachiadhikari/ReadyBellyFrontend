@@ -267,17 +267,17 @@ class ViewCart extends Component {
                     </li>
                   </ul>
                   
-                  {/* <button
+                  <button
                     type="submit"
                     onClick={this.bookFinal}
                     class="btn btn-primary btn-rounded"
                   >
                     confirm booking
-                  </button> */}
-                 <div>
+                  </button>
+                 {/* <div>
                   <MDBBtn onClick={this.bookFinal} color="success" >Cash on Delivery</MDBBtn>
                      
-                  </div>
+                  </div> */}
                   <div>
                       
                      {/* <center>{     
