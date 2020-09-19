@@ -153,6 +153,7 @@ sort = (type, order) => {
       redirect: false,
       products: [],
       isLoggedInUserVendor: localStorage.getItem("userType") === "VENDOR",
+      
     };
   }
 

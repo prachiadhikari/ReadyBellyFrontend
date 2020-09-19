@@ -192,6 +192,7 @@ export default class UserProfile extends Component {
                                                    (this.fileInput = fileInput)
                                                  }
                                                />{" "}
+                                               {$imagePreview}
                                              </div>
                                            </FormGroup>
                             <Button color='green' onClick={this.uploadImageAndUpdate} block>Update User</Button>

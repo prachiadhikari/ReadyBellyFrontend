@@ -10,6 +10,8 @@ import Footer from "./Footer";
 import Navigation from "./NavbarM";
 import CarouselPage from "./Carousel";
 import HomePage from "./Home";
+import Product from "./Producthome";
+
 
 
 class Home extends Component {
@@ -23,6 +25,8 @@ class Home extends Component {
         <Navigation />
         <CarouselPage />
         <HomePage />
+        <Product />
+
 
         <section className="text-center my-5"></section>
         <Footer />

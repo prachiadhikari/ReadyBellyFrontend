@@ -187,7 +187,7 @@ toggleCollapseList = collapseID => () => {
                   (
                     <div>
                       <MDBCard style={{ marginTop: "1rem" }}>
-                      <MDBCardHeader color="unique-color">
+                      <MDBCardHeader color="stylish-color-dark ">
                       {new Date(createdAt).toLocaleDateString()} - {new Date(createdAt).toISOString().substr(11, 8)}
 
                         <MDBBtn
@@ -210,8 +210,9 @@ toggleCollapseList = collapseID => () => {
                       </MDBCardHeader>
                       <MDBCardBody style={{paddingBottom: "0px"}}>
                       <MDBCollapse id={"basicCollapse" + createdAt} isOpen={this.state.collapseID}>
-                    <Table striped bordered hover>
-                     <thead>
+                      <MDBTable striped>
+                  <MDBTableHead color="unique-color-dark" textWhite>
+                    
                        <tr>
                          <th>Id</th>
                          <th>Product Image</th>
@@ -222,7 +223,7 @@ toggleCollapseList = collapseID => () => {
                          <th>Vendor Remarks</th>
                          <th>Action</th>
                        </tr>
-                     </thead>
+                       </MDBTableHead>
                      <tbody>
                        {
                      this.state.purchases[createdAt].map( (purchase, index) => 
@@ -264,7 +265,7 @@ toggleCollapseList = collapseID => () => {
                          ))
                         }
                      </tbody>
-                   </Table>
+                   </MDBTable>
                             </MDBCollapse>
                   
                       </MDBCardBody>
