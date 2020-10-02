@@ -65,46 +65,54 @@ class TopSeller extends Component {
       <p className='grey-text text-center w-responsive mx-auto mb-5'>
       "What differentiates sellers today is their ability to bring fresh ideas." -Jill Konrath</p>
       <MDBRow> {users.map(prod => (
-      <MDBCol md="6" lg="4">
-        <MDBCard className="m-2" style={{ width: "22rem" }} cascade ecommerce wide>
-      <MDBCardImage
+      <MDBCol lg='3' md='6' className='mb-lg-0 mb-4'>
+         
+         <MDBCard cascade narrow ecommerce>
+ <MDBCardImage
         cascade
         top style={{ height: "200px"}}
         src={this.state.path + prod.image_path}
         alt="vendor image"
-        waves
+        overlay='white-slight'
       />
       <MDBCardBody cascade className="text-center">
-        <MDBCardTitle tag="h5"><MDBIcon icon="user" />
-               {prod.user_type}</MDBCardTitle>
+      <a href='#!' className='grey-text'>
+                <h5> {prod.address1}</h5>
+              </a>
         <MDBCardTitle>
           <a href="#!">
             <strong>{prod.fullname}</strong>
           </a>
         </MDBCardTitle>
+        
+       
         <MDBCardText>
-        {prod.phone} </MDBCardText>
-        <MDBCardFooter><MDBRow>
-          <MDBCol>
-          <MDBRating feedback />
-          </MDBCol>
-          </MDBRow>
-          <span className="float-left">{prod.address1}</span>
-          <span className="float-right">
-            <MDBTooltip placement="top">
-              <MDBBtn tag="a" href="https://mdbootstrap.com" target="_blank" color="transparent" size="lg" className="p-1 m-0 mr-2 z-depth-0" >
-                  <MDBIcon icon="share-alt"/>
-              </MDBBtn>
-              <div>Share</div>
-            </MDBTooltip>
-            <MDBTooltip placement="top">
+        {prod.phone} <br/>
+       {prod.email}
+          
+          </MDBCardText>
+        
+       
+
+<MDBCardFooter className='px-1'>
+  
+                <span className='float-left font-weight-bold'>
+                  <strong><MDBRating/></strong>
+                </span>
+                <span className='float-right'>
+                 
+                  <MDBTooltip domElement placement='top'>
+                    <i className='grey-text fa fa-share-alt mr-3' />
+                    <span>Share</span>
+                  </MDBTooltip>
+                  <MDBTooltip placement="top">
               <MDBBtn tag="a" color="transparent" size="lg" className="p-1 m-0 z-depth-0" >
                 <MDBIcon icon="heart" className="red-text"/>
               </MDBBtn>
               <div>Added to Wishlist</div>
             </MDBTooltip>
-          </span>
-        </MDBCardFooter>
+                </span>
+              </MDBCardFooter>
       </MDBCardBody>
     </MDBCard>
     </MDBCol>

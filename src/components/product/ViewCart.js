@@ -46,6 +46,11 @@ class ViewCart extends Component {
       },
     };
   }
+  onClick = (nr) => () => {
+    this.setState({
+      radio: nr
+    });
+  }
   updateCart = (product) => {
     let cart = JSON.parse(localStorage.getItem("cart"));
     let newCart = cart.map((cartProduct) => {
@@ -249,6 +254,7 @@ class ViewCart extends Component {
                       Shipping
                       <span>RS 0</span>
                     </li>
+                    
                     <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                       <div>
                         <strong>The total price of</strong>
@@ -265,7 +271,9 @@ class ViewCart extends Component {
                         </strong>
                       </span>
                     </li>
+                   
                   </ul>
+                 
                   
                   <button
                     type="submit"
@@ -274,21 +282,7 @@ class ViewCart extends Component {
                   >
                     confirm booking
                   </button>
-                 {/* <div>
-                  <MDBBtn onClick={this.bookFinal} color="success" >Cash on Delivery</MDBBtn>
-                     
-                  </div> */}
-                  <div>
-                      
-                     {/* <center>{     
-                             <StripeCheckout
-                             onClick={this.bookFinal}
-                             stripeKey="pk_test_mOUfpxsf7uHArKmrOzVHLXu700t9B02FOq"
-                             
-                             />
-                      
-                     }</center> */}
-                 </div>
+                 
                   </MDBCol>
                 </MDBCardBody>
               </MDBCard>

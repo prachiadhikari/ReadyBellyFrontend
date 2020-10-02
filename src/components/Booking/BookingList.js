@@ -153,7 +153,8 @@ class BookingList extends Component {
       <div>
         <MDBContainer fluid>
           <Navigation />
-          <h2 className="font-weight-bold green-text" style={{ marginTop: "40px" }}>Booked/ Purchased Products</h2>
+          <h2 className="font-weight-bold green-text" style={{ marginTop: "40px" }}>Booked/ Purchased Products
+          </h2>
 
           <MDBRow>
             <MDBCard style={{ width: "100%" }}>
@@ -170,6 +171,7 @@ class BookingList extends Component {
                         
                         <th>Status</th>
                         <th>User Remarks</th>
+                        <th>Payment Remarks</th>
                         <th>Action</th>
                       </tr>
                     </MDBTableHead>
@@ -190,6 +192,8 @@ class BookingList extends Component {
                          
                           <td> {purchase.status}</td>
                           <td>{purchase.userRemarks}</td>
+                          <td>{purchase.payment}</td>
+
                           
                           <td>
                             <MDBBtn color="primary" style={{paddingRight:'15px',display : (purchase.status ==='CANCELED'  || purchase.status ==='DELIVERED' || purchase.status ==='PROCESSING')? 'none' :'block'}}
