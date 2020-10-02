@@ -22,23 +22,11 @@ class ProductEmpty extends React.Component {
       render(){
   return (
     <div>
-      <NavbarM/>
         <section
           className='card-image'
           style={{margin:"20px"}}
         >
-            <MDBCol sm="3">
-                <MDBBtn
-                  color="success"
-                  rounded
-                  className="white-text"
-                  onClick={() => this.toggleAdd()}
-                >
-                  ADD NEW FOOD
-                  <MDBIcon style={{marginLeft:"5px"}} icon="plus-circle"/>
-                
-                </MDBBtn>
-              </MDBCol>
+           
               <center><img
               src="Image/EMPTY.png"
               alt=""
@@ -55,7 +43,6 @@ class ProductEmpty extends React.Component {
                 </MDBModalBody>
               </MDBModal>
         </section>
-        <Footer/>
     </div>
   );
 };

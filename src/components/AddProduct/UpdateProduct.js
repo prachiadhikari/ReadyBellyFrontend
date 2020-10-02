@@ -256,28 +256,6 @@ class UpdateProduct extends React.Component {
   };
 
   render() {
-    // for image preview
-    let $imagePreview = (
-      <label
-        htmlFor="previewImage"
-        className="previewText image-container"
-      ></label>
-    );
-    if (this.state.imagePreviewUrl) {
-      $imagePreview = (
-        <label
-          htmlFor="previewImage"
-          className="image-container text-center"
-        >
-          <img
-            src={this.state.imagePreviewUrl}
-            alt="icon"
-            width="200"
-            height="200"
-          />
-        </label>
-      );
-    }
     return (
       <MDBContainer>
         <MDBRow>
@@ -411,39 +389,24 @@ class UpdateProduct extends React.Component {
                           ) : null}
                         </FormGroup>
                         <FormGroup>
-
-                        <div className="input-group">
-                                              <div className="input-group-prepend">
-                                                <span className="input-group-text" id="inputGroupFileAddon01">
-                                                  Upload
-                                                </span>
-                                              </div>
-                                              <div className="custom-file">
-                                                <input
-                                                  type="file"
-                                                  inputprops={{
-                                                    accept: "image/*",
-                                                  }}
-                                                  className="custom-file-input"
-                                                  id="inputGroupFile01"
-                                                  aria-describedby="inputGroupFileAddon01"
-                                                  onChange={
-                                                    this.handleFileSelected
-                                                  }
-                                                  ref={(fileInput) =>
-                                                    (this.fileInput = fileInput)
-                                                  }
-                                                />
-                                                <label className="custom-file-label" htmlFor="inputGroupFile01">
-                                                  Choose file
-                                                </label>
-                                              </div>
-                                              
-                                            </div>
-                                            {" "}
-                                               {$imagePreview}
-
-                        </FormGroup>
+                                             <div>
+                                               <input
+                                                 type="file"
+                                                 inputprops={{
+                                                   accept: "image/*",
+                                                 }}
+                                                 id="previewImage"
+                                                 name="avatar"
+                                                 onChange={
+                                                   this.handleFileSelected
+                                                 }
+                                                 ref={(fileInput) =>
+                                                   (this.fileInput = fileInput)
+                                                 }
+                                               />{" "}
+        
+                                             </div>
+                                           </FormGroup>
                       </div>
                       <div className="text-center py-6 mt-6">
                         <MDBBtn

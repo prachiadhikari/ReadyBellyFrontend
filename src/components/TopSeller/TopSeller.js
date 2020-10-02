@@ -8,7 +8,7 @@ import {
   MDBCol,
   MDBContainer,
   Link,
-  MDBCard,
+  MDBCard,MDBRating,
   MDBCardBody,
   MDBTooltip,
   MDBCardFooter,
@@ -84,7 +84,11 @@ class TopSeller extends Component {
         </MDBCardTitle>
         <MDBCardText>
         {prod.phone} </MDBCardText>
-        <MDBCardFooter>
+        <MDBCardFooter><MDBRow>
+          <MDBCol>
+          <MDBRating feedback />
+          </MDBCol>
+          </MDBRow>
           <span className="float-left">{prod.address1}</span>
           <span className="float-right">
             <MDBTooltip placement="top">

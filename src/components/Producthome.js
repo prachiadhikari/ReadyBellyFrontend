@@ -121,6 +121,7 @@ class TopSeller extends Component {
         <MDBCardFooter>
           
           <span className="float-left">{prod.address1}</span>
+          
           <span className="float-right">
             <MDBTooltip placement="top">
               <MDBBtn tag="a" href="https://mdbootstrap.com" target="_blank" color="transparent" size="lg" className="p-1 m-0 mr-2 z-depth-0" >

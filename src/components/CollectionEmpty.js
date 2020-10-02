@@ -6,12 +6,14 @@ import {
  MDBCard,
  MDBCol,MDBBtn,Link
 } from "mdbreact";
+import Navigation from "./NavbarM";
 import Footer from "./Footer";
-import NavbarM from "./NavbarM";
+
+
 const CollectionEmpty = () => {
   return (
     <div>
-      <NavbarM/>
+      <Navigation/>
         <section 
           className='card-image'
           style={{margin:"20px"}}>
