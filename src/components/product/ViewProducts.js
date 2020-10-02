@@ -9,7 +9,7 @@ import {
   MDBModalBody,
   MDBRow,
   MDBCol,
-  MDBCard,
+  MDBCard,MDBRating,
   MDBCardBody,
   MDBMask,
   MDBIcon,
@@ -228,6 +228,7 @@ class Products extends React.Component {
                                       </span>
                                     </MDBCol>
                                   </MDBRow>
+                                  
                                   <MDBRow>
                                     <MDBCol>
                                       <MDBBadge pill color="danger">
@@ -247,16 +248,20 @@ class Products extends React.Component {
                                       </MDBBadge>
                                     </MDBCol>
                                   </MDBRow>
+                                 
                                   <MDBRow>
                                     <MDBCol>
                                       <h4 className="font-weight-bold black-text">
                                         {product.name}
                                       </h4>
                                     </MDBCol>
+                                    
                                   </MDBRow>
-                                 
+                                  <MDBRating feedback/>
                                   {!this.state.isLoggedInUserVendor ? (
+                                     
                                     <MDBRow>
+                                      
                                       <MDBCol >
                                         <a onClick={() => this.add(product)}>
                                         <MDBTooltip placement="top">
@@ -277,7 +282,11 @@ class Products extends React.Component {
               
             </MDBTooltip> 
             </MDBCol>
+            
+            
                                     </MDBRow>
+                                    
+                                    
                                   ) : null}
                                   {this.state.isLoggedInUserVendor ? (
                                     <MDBRow>
