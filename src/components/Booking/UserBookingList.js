@@ -86,7 +86,45 @@ groupAndGetFinalPurchase = (purchases) => {
   });
   return purchaseMap;
 }
+updateBookingPayment = function(booking, payment, purchaseId){
+  console.log(booking);
+  const axios = require('axios');
+  var headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    };
 
+  const { version } = require('axios/package');
+  //axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem("token");
+  axios.defaults.headers.common['Content-Type'] = 'application/json';
+  var data ={id :'', status:''};
+  if(status === 'cashondelivery'){
+      data.id= booking.id;
+      data.payment= 'CASH_ON_DELIVERY';
+  }else if(status === 'paid') {
+      data.id= booking.id;
+      data.payment= 'PAID';
+  } 
+  else  {
+      data.id= booking.id;
+      data.payment= 'CANCELED';
+  } 
+  location.reload();
+  console.log(data);
+
+   axios
+      .post("http://localhost:3023/api/purchase/"+booking.id + "/payment-update" , data, {
+        headers: headers,
+      })
+      .then((response) => {
+        location.reload();
+        toast.response("Booking Status Updated Sucessfully");
+
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+}
 cancelBooking = function(purchaseId, feedback){
     var headers = {
         "Content-Type": "application/json",
@@ -179,9 +217,7 @@ toggleCollapseList = collapseID => () => {
             <MDBCard style={{ width: "100%" }}>
               <MDBCardBody>
                 <MDBCol sm="12">
-                  <MDBBtn color="success">Cash on Delivery</MDBBtn>
-                  <StripeCheckout stripeKey="pk_test_mOUfpxsf7uHArKmrOzVHLXu700t9B02FOq" />
-
+               
                   {
                   Object.keys(this.state.purchases).map((createdAt, i) => 
                   (
@@ -221,6 +257,9 @@ toggleCollapseList = collapseID => () => {
                          <th>Quantity</th>
                          <th>Status</th>
                          <th>Vendor Remarks</th>
+                         <th>Payment</th>
+                         <th>Payment Action</th>
+
                          <th>Action</th>
                        </tr>
                        </MDBTableHead>
@@ -242,7 +281,12 @@ toggleCollapseList = collapseID => () => {
                            <td>{purchase.quantity}</td>
                            <td> {purchase.status}</td>
                            <td> {purchase.vendorRemarks}</td>
+                           <td> {purchase.payment}</td>
+                           <td>
+                       <StripeCheckout stripeKey="pk_test_mOUfpxsf7uHArKmrOzVHLXu700t9B02FOq" />
 
+                           </td>
+                           
                            <td>
                              <MDBBtn
                                color="danger"

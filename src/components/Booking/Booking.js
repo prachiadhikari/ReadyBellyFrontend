@@ -96,30 +96,19 @@ return (
                     <form>
                       <MDBRow>
                  
-                         <MDBCol md="6" className="mb-4">
-                          <label 
-                          htmlFor="id">
-                          Product Id
-                          </label>
-                          <input 
-                          type="text" 
-                          id="id" 
-                          className="form-control"/>
-                        </MDBCol>
-
-                        <MDBCol md="6" className="mb-2">
-                          <label 
-                          htmlFor="quantity">
-                          Quantity
-                          </label>
-                          <input 
-                          type="text" 
-                          id="quantity" 
-                          className="form-control"/>
-                        </MDBCol>
+                         
                        
                         <MDBCol>  
                           <label 
+                          htmlFor="text">
+                          Name
+                          </label>
+                          <input 
+                          type="text" 
+                          id="price" 
+                          className="form-control mb-4"  />
+
+<label 
                           htmlFor="text">
                           Price
                           </label>
@@ -127,8 +116,6 @@ return (
                           type="text" 
                           id="price" 
                           className="form-control mb-4"  />
-
-
                           <label 
                           htmlFor="address">
                           Address
