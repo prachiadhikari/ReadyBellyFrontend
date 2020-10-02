@@ -104,7 +104,7 @@ export default class Feedback extends Component {
               }}
             >
               <MDBCardHeader
-                className="form-header warm-flame-gradient rounded white-text"
+                className="form-header unique-color-dark rounded white-text"
                 style={{ width: "452px" }}
               >
                 <h3 className="my-3">
@@ -131,7 +131,7 @@ export default class Feedback extends Component {
                         success="right"
                       />
                       {this.state.emailError ? (
-                        <Alert color="danger" size="sm" className="mt-2">
+                        <Alert color="red darken-4" size="sm" className="mt-2">
                           {this.state.emailError}
                         </Alert>
                       ) : null}

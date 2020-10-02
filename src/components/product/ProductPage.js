@@ -6,7 +6,7 @@ import {
   MDBContainer,
   MDBCardHeader,
   MDBBtn,
-  MDBCard,
+  MDBCard,MDBBadge,
   MDBCardBody,
   MDBDropdown,
   MDBDropdownToggle,
@@ -198,7 +198,7 @@ sort = (type, order) => {
             {this.state.isLoggedInUserVendor ? (
               <MDBCol sm="3">
                 <MDBBtn
-                  color="success"
+                  color="mdb-color darken-3"
                   rounded
                   className="white-text"
                   onClick={() => this.toggleAdd()}
@@ -211,33 +211,41 @@ sort = (type, order) => {
             ) : (
               <MDBCol sm="3">
               <Link to="/viewcart">
-                <MDBBtn
+              {/* <span className="counter">22</span> */}
+                <MDBBtn  
                   onClick={this.update}
                   color="warning"
                   style={{
-                    marginTop: "15px",
-                    marginLeft: "44%",
                     display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    justifyContent: "left",
+                    alignItems: "left",
                   }}
                 >
+                 
                   {this.state.viewcart ? "Hide " : "View "} Cart
                   <MDBIcon style={{marginLeft:"5px"}} icon="shopping-cart"/>
+                  <MDBBadge color="danger" className="ml-2">4</MDBBadge>
                 </MDBBtn>
+                
                 </Link>
+                
               </MDBCol>
             )}
           </MDBRow>
           <MDBRow>
-            <MDBCol sm="12">
-            <input type="text" 
-      placeholder="Enter product to be searched" 
-      style={elementStyle} 
-      onChange={this.searchProduct}
-      //onClick={() => this.searchProduct(product.search)}
-       />
-            </MDBCol>
+          <MDBCol md="12">
+      <div className="input-group md-form form-sm form-1 pl-0">
+        <div className="input-group-prepend">
+          <span className="input-group-text unique-color-dark lighten-3" id="basic-text1">
+            <MDBIcon className="text-white" icon="search" />
+          </span>
+        </div>
+        <input   placeholder="Enter product to be searched" 
+  
+      onChange={this.searchProduct} className="form-control my-0 py-1" type="text" aria-label="Search" />
+      </div>
+    </MDBCol>
+          
           </MDBRow>
           <MDBRow>
             <MDBCol sm="12">

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from "react";
-import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
+import { MDBCol, MDBContainer,MDBIcon, MDBRow, MDBFooter } from "mdbreact";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -47,77 +47,45 @@ const Footer = () => {
               Dillibazar, Kathmandu
             </p>
             <p>
-              <img
-                src="Image/email.jpeg"
-                alt=""
-                style={{ width: 20, height: 20, borderRadius: 10 }}
-              />{" "}
+            <a href="#!" className="email-ic mr-3">
+        <MDBIcon icon="envelope" />
+      </a>{" "}
               info@example.com
             </p>
             <p>
-              <img
-                src="Image/phones.jpeg"
-                alt=""
-                style={{ width: 20, height: 20, borderRadius: 10 }}
-              />{" "}
+            <a href="#!" className="email-ic mr-3">
+        <MDBIcon icon="phone" />
+      </a>{" "}
               + 01 234 567 88
             </p>
             <p>
-              <img
-                src="Image/mob.jpeg"
-                alt=""
-                style={{ width: 20, height: 20, borderRadius: 10 }}
-              />{" "}
+            <a href="#!" className="email-ic mr-3">
+        <MDBIcon icon="phone" />
+      </a>{" "}
               + 01 234 567 89
             </p>
           </MDBCol>
           <hr className="clearfix w-100 d-md-none" />
           <MDBCol md="5" lg="3">
             <h5 className="text-uppercase mb-4 font-weight-bold">Follow us</h5>
-
-            <img
-              src="Image/fb.jpeg"
-              alt=""
-              style={{
-                width: 20,
-                height: 20,
-                borderRadius: 10,
-                marginRight: 5,
-              }}
-            />
-
-            <img
-              src="Image/twitter.png"
-              alt=""
-              style={{
-                width: 20,
-                height: 20,
-                borderRadius: 10,
-                marginRight: 5,
-              }}
-            />
-
-            <img
-              src="Image/insta.jpeg"
-              alt=""
-              style={{
-                width: 20,
-                height: 20,
-                borderRadius: 10,
-                marginRight: 5,
-              }}
-            />
-
-            <img
-              src="Image/google.png"
-              alt=""
-              style={{
-                width: 20,
-                height: 20,
-                borderRadius: 10,
-                marginRight: 5,
-              }}
-            />
+            <a href="#!" className="fb-ic mr-3">
+        <MDBIcon fab icon="facebook-f" />
+      </a>
+      <a href="#!" className="tw-ic mr-3">
+        <MDBIcon fab icon="twitter" />
+      </a>
+      <a href="#!" className="gplus-ic mr-3">
+        <MDBIcon fab icon="google-plus-g" />
+      </a>
+      <a href="#!" className="ins-ic mr-3">
+        <MDBIcon fab icon="instagram" />
+      </a>
+      <a href="#!" className="pin-ic mr-3">
+        <MDBIcon fab icon="pinterest" />
+      </a>
+      <a href="#!" className="email-ic mr-3">
+        <MDBIcon icon="envelope" />
+      </a>
           </MDBCol>
           <hr className="clearfix w-100 d-md-none" />
         </MDBRow>

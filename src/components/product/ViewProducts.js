@@ -103,33 +103,9 @@ class Products extends React.Component {
     }
   }
 
-  // plus = (products) => {
-  //   this.add(products);
-  // };
+  
 
-  // delete = (products) => {
-  //   const product = this.state.cart.filter((p) => p.id !== products.id);
-  //   this.setState({
-  //     cart: product,
-  //     total: this.state.total - products.quantity * products.price,
-  //   });
-  // };
 
-  // minus = (products) => {
-  //   if (products.quantity != 1) {
-  //     this.setState({
-  //       cart: [
-  //         ...this.state.cart.filter((p) => p.id != products.id),
-  //         { ...products, quantity: products.quantity - 1 },
-  //       ],
-  //       total: this.state.total - products.price,
-  //     });
-  //   } else {
-  //     this.delete(products);
-  //   }
-  // };
-
-    //// ///////
 
   getManagedProductsByType(products) {
     let productsByType = {};
@@ -283,18 +259,24 @@ class Products extends React.Component {
                                     <MDBRow>
                                       <MDBCol >
                                         <a onClick={() => this.add(product)}>
-                                          <img
-                                            style={{
-                                              height: "80px",
-                                              width: "80px",
-                                              borderRadius:"20px"
-                                            }}
-                                            src="./Image/cart.png"
-                                          />
+                                        <MDBTooltip placement="top">
+                                        <MDBBtn tag="a" color="transparent" size="lg" className="p-1 m-0 z-depth-0" left >
+                                          <MDBIcon icon="shopping-cart" className="black-text"/>
+                                        </MDBBtn>
+                                        <div>Add to cart</div>
+                                        
+                                      </MDBTooltip>
                                         </a>
                                       </MDBCol>
-                                       
-                                     
+                                      <MDBCol>
+                                      <MDBTooltip placement="top">
+              <MDBBtn tag="a" color="transparent" size="lg" className="p-1 m-0 z-depth-0" >
+                <MDBIcon icon="heart" className="red-text"/>
+              </MDBBtn>
+              <div>Added to Wishlist</div>
+              
+            </MDBTooltip> 
+            </MDBCol>
                                     </MDBRow>
                                   ) : null}
                                   {this.state.isLoggedInUserVendor ? (
@@ -309,24 +291,24 @@ class Products extends React.Component {
                                             this.toggleEdit(product)
                                           }
                                         >
-                                          <img
-                                            style={{
-                                              height: "46px",
-                                              width: "50px",
-                                            }}
-                                            src="./Image/edi.png"
-                                          />
+                                          <MDBTooltip placement="top">
+                                        <MDBBtn tag="a" color="transparent" size="lg" className="p-1 m-0 z-depth-0" left >
+                                          <MDBIcon icon="edit" className="black-text"/>
+                                        </MDBBtn>
+                                        <div>Edit product</div>
+                                        
+                                      </MDBTooltip>
                                         </a>
                                       </MDBCol>
                                       <MDBCol xs="6" sm="6">
                                         <a onClick={() => this.deleteProduct(product.id)}>
-                                          <img
-                                            style={{
-                                              height: "43px",
-                                              width: "48px",
-                                            }}
-                                            src="./Image/delete.jpg"
-                                          />
+                                        <MDBTooltip placement="top">
+                                        <MDBBtn  tag="a" color="transparent" size="lg" className="p-1 m-0 z-depth-0" left >
+                                          <MDBIcon icon="trash" className="red-text"/>
+                                        </MDBBtn>
+                                        <div>Delete product</div>
+                                        
+                                      </MDBTooltip>
                                         </a>
                                       </MDBCol>
                                     </MDBRow>

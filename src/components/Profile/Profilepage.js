@@ -170,7 +170,7 @@ export default class ProfilePage extends Component {
             <MDBCardBody>
               <MDBRow>
                 <MDBCol sm="4">
-                <MDBCard style={{width:250,height:250}}>
+                <MDBCard style={{width:250}}>
                 <img className='img-thumbnail'
                                     width='250' height='250' src={`http://localhost:3023/${this.state.user.image_path}`}
                                     alt="profile" />
@@ -178,7 +178,7 @@ export default class ProfilePage extends Component {
                 <h3 className="font-weight-bold unique-color-dark-text">{this.state.user.fullname}</h3>
               <p><Link to="profile"><MDBIcon  icon="camera"  href="profile" style={{paddingRight:'15px',margin:"10px"}}>Change  picture</MDBIcon> </Link> 
               </p>
-              <p><Link to="profile"><MDBIcon  icon="key"  href="profile" style={{paddingRight:'15px',marginRight:"10px"}}>Change  password</MDBIcon> </Link> 
+              <p><Link to="passwordchange"><MDBIcon  icon="key"  href="passwordchange" style={{paddingRight:'15px',marginRight:"10px"}}>Change  password</MDBIcon> </Link> 
               </p>
                 </MDBCol>
                 <MDBCol sm="8">

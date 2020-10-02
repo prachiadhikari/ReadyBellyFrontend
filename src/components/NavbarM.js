@@ -94,8 +94,8 @@ class NavbarM extends Component {
          
             <MDBCol sm="4">
             <MDBNavbarNav>
-              <MDBNavItem active>
-                <MDBNavLink as={Link} to="/" active={true}>
+              <MDBNavItem >
+                <MDBNavLink as={Link} to="/" >
                   Home
                 </MDBNavLink>
               </MDBNavItem>

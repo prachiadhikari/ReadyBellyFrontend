@@ -17,6 +17,7 @@ const HomePage = () => {
               'url(Image/backgroound.jpg)'
           }}
         >
+          
           <div className='text-white text-center d-flex flex-column align-items-center rgba-black-strong py-5 px-4 rounded'>
            
             <h3 className='py-3 font-weight-bold'>
@@ -32,6 +33,9 @@ const HomePage = () => {
             </h3>
             
           </div>
+        </MDBCard>
+        <MDBCard>
+          
         </MDBCard>
     </div>
   );

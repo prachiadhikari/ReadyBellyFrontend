@@ -7,7 +7,7 @@ import {
   MDBContainer,
   MDBCardHeader,
   MDBBtn,
-  MDBCard,
+  MDBCard,MDBInputGroup,
   MDBCardBody,
   MDBModalBody,
   MDBCardImage,
@@ -494,19 +494,18 @@ class Registration extends React.Component {
                                              ) : null}
                                            </FormGroup>
                                            <FormGroup>
-                                               <div>
-                                                 
-                                                 <select
-                                                   className="browser-default custom-select"
-                                                   value={this.state.user_type}
-                                                   name="user_type"
-                                                   id="user_type"
-                                                   onChange={
-                                                     this
-                                                       .updateRegistrationValues
-                                                   }
-                                                 >
-                                                   <option>UserType</option>
+                                           <MDBInputGroup
+                                              containerClassName="mb-3"
+                                              append="Choose"
+                                              inputs={
+                                                <select   value={this.state.user_type}
+                                                name="user_type"
+                                                id="user_type"
+                                                onChange={
+                                                  this
+                                                    .updateRegistrationValues
+                                                } className="browser-default custom-select">
+                                                 <option>UserType</option>
                                                    <option value="VENDOR">
                                                      Vendor
                                                    </option>
@@ -516,38 +515,51 @@ class Registration extends React.Component {
                                                    <option value="ADMIN">
                                                      Admin
                                                    </option>
-                                                 </select>
-                                                 
-                                               </div>
-                                             {this.state.usertypeError ? (
-                                               <Alert
-                                                 color="danger"
-                                                 size="sm"
-                                                 className="mt-2"
-                                               >
-                                                 {this.state.usertypeError}
-                                               </Alert>
-                                             ) : null}
+                                                </select>
+                                              }
+                                            />{this.state.usertypeError ? (
+                                              <Alert
+                                                color="danger"
+                                                size="sm"
+                                                className="mt-2"
+                                              >
+                                                {this.state.usertypeError}
+                                              </Alert>
+                                            ) : null}
                                            </FormGroup>
                                           
-                                           <FormGroup>
-                                             <div>
-                                               <input
-                                                 type="file"
-                                                 inputprops={{
-                                                   accept: "image/*",
-                                                 }}
-                                                 id="previewImage"
-                                                 name="avatar"
-                                                 onChange={
-                                                   this.handleFileSelected
-                                                 }
-                                                 ref={(fileInput) =>
-                                                   (this.fileInput = fileInput)
-                                                 }
-                                               />{" "}
+                                           <div className="input-group">
+                                              <div className="input-group-prepend">
+                                                <span className="input-group-text" id="inputGroupFileAddon01">
+                                                  Upload
+                                                </span>
+                                              </div>
+                                              <div className="custom-file">
+                                                <input
+                                                  type="file"
+                                                  inputprops={{
+                                                    accept: "image/*",
+                                                  }}
+                                                  className="custom-file-input"
+                                                  id="inputGroupFile01"
+                                                  aria-describedby="inputGroupFileAddon01"
+                                                  onChange={
+                                                    this.handleFileSelected
+                                                  }
+                                                  ref={(fileInput) =>
+                                                    (this.fileInput = fileInput)
+                                                  }
+                                                />
+                                                <label className="custom-file-label" htmlFor="inputGroupFile01">
+                                                  Choose file
+                                                </label>
+                                              </div>
+                                              
+                                            </div>
+                                            {" "}
                                                {$imagePreview}
-                                             </div>
+                                           <FormGroup>
+                                             
                                            </FormGroup>
                                          </div>
                                          <div className="text-center py-6 mt-6">
