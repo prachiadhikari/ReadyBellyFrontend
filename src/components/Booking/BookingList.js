@@ -159,9 +159,9 @@ class BookingList extends Component {
             <MDBCard style={{ width: "100%" }}>
               <MDBCardBody>
                 <MDBCol sm="12">
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
+                <MDBTable striped>
+                  <MDBTableHead color="unique-color-dark" textWhite>
+                    <tr>
                         <th>Id</th>
                         <th>Product Image</th>
                         <th>Product Name</th>
@@ -172,7 +172,7 @@ class BookingList extends Component {
                         <th>User Remarks</th>
                         <th>Action</th>
                       </tr>
-                    </thead>
+                    </MDBTableHead>
                     <tbody>
                       {this.state.purchases.map((purchase, index) => (
                         <tr>
@@ -207,7 +207,7 @@ class BookingList extends Component {
                         </tr>
                       ))}
                     </tbody>
-                  </Table>
+                  </MDBTable>
                 </MDBCol>
               </MDBCardBody>
             </MDBCard>

@@ -219,8 +219,7 @@ render(){
             className="rounded z-depth-1-half map-container"
             style={{ height: "400px" }}
           >
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.625208399643!2d85.3111801147092!3d27.69797643251131!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19b2acafb947%3A0x3a9e89b8f3fd05d0!2sCity%20Sports!5e0!3m2!1sen!2snp!4v1592299144398!5m2!1sen!2snp"
-
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.359005886075!2d85.32785091449199!3d27.706199732150523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb190a74aa1f23%3A0x74ebef82ad0e5c15!2sSoftwarica%20College%20Of%20IT%20%26%20E-Commerce!5e0!3m2!1sen!2snp!4v1601545882847!5m2!1sen!2snp" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"
               title="This is a unique title"
               width="100%"
               height="100%"

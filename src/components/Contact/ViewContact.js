@@ -97,7 +97,7 @@ deleteContact = (cid) => {
               <MDBCardBody>
                 <MDBCol sm="12">
                  <MDBTable striped>
-                  <MDBTableHead color="primary-color" textWhite>
+                  <MDBTableHead color="unique-color-dark" textWhite>
                     <tr>
                      <th>Id</th>
                       <th>User Name</th>
@@ -114,7 +114,7 @@ deleteContact = (cid) => {
                        <td>{contact.yourname}</td>
                        <td>{contact.youremail}</td>
                        <td>{contact.yourfeedback}</td>
-                       <td> <MDBBtn color="danger" onClick={() => this.deleteContact(contact.id)}> Remove Query </MDBBtn></td>
+                       <td> <MDBBtn color="red darken-4" onClick={() => this.deleteContact(contact.id)}> Remove Query </MDBBtn></td>
                        
                     </tr>
                       ))}
