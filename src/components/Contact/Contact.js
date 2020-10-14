@@ -249,8 +249,8 @@ render(){
                <MDBBtn tag="a" floating color="red accent-2" className="accent-1">
                 <MDBIcon icon="envelope" />
               </MDBBtn>
-              <p>sports@gmail.com</p>
-              <p className="mb-md-0">citysports@gmail.com</p>
+              <p>onlinefood1@gmail.com</p>
+              <p className="mb-md-0">readybelly@gmail.com</p>
             </MDBCol>
           </MDBRow>
         </MDBCol>
